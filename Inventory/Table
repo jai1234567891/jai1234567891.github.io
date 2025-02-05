@@ -1,0 +1,11 @@
+//Vars
+
+//object contructor for each item (name, amount, location)
+
+//getName (forName of item)
+
+//getAmount (gets amount)
+
+//updateAmount(updates amount based on text input)
+
+//getLocation (gets location)
