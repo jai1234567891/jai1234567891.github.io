@@ -1,6 +1,5 @@
-//Vars
-
-//object contructor for each item (name, amount, location)
+//array
+    // keeps the value for the main array
 
 //getName (forName of item)
 

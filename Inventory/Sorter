@@ -1,5 +1,3 @@
-//creates array?
-
 //Sorts by name
     /*Checks current sorting style, if sorted by alpha ascend change to descen, if descend cancel sort
     if none sort ascend */
@@ -15,9 +13,7 @@
 
 
 //Sorts by location
-    /*Checks current sorting style, if sorted by alpha ascend change to descen, if descend cancel sort
-    if none sort ascend */
-    //same as alpha sorter but location based, then go by alpha
+    //same as alpha sorter but location column instead of name, if same loction then go by alpha
 
 //Search bar
     //search name and location for substring, if found the item stays in table, otherwise removed from table

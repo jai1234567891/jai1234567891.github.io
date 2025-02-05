@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
-   <body>
-      <!--TITLE-->
+   <head>
+      <style>
+      table,th,tr{
+         border: 2px solid rgb(235, 21, 21);
+         border-collapse: collapse;
+      }
+      </style>
+      
+      <body>
+         <h1>GearCats Electrical Inventory</h1>
+
+      <!-- creates the table based on array values-->
+         <table style="width: 100%;">
+            <tr>
+               <th>name</th>
+               <th style = "width:10%">amount</th>
+               <th style = "width:30%">location</th>
+            </tr>
+         <!-- get length of array, put into for loop going for length, get array item based on loop count
+          split it by spaces-> until first space is name, first to second is amount, last is loc-->
 
       <!--Display inventory as table, search bar at top, button to add item at the top-->
-         <!-- adding item is calling add item script-->
-          <!--Search bar substring if it contians stays, if not removed-->
+         <!-- adding item is adding to array script-->
+            <!-- 
+            "name amount location" is stored in array-->
+
+         <!--Search bar-->
+            <!--create local array based on orginal array, filter by contains search box term-->
 
       <!--on button click of name column, sort alphabetically ascending, descending,-->
          <!--Script called by sorter name method-->
@@ -18,7 +40,8 @@
       
       <!--Next to amount button for changing with text box for amount, buttons for arrows for increase/decrease-->
          <!--Update amount variable based on button click and change by amount -->
-      
+            
 
-   </body>
+       </body>
+   </head>
 </html>
