@@ -1,19 +1,32 @@
-//Sorts by name
+//variable for current sorting status
+let sorter = "none"
+
+//Sorts by name 
     /*Checks current sorting style, if sorted by alpha ascend change to descen, if descend cancel sort
-    if none sort ascend */
-    //ascend: numbers smallest to largest, Goes first letter, then second letter, then third, ect. until no change in 2 passes, sort via minimum
-    //descend: Goes first letter, then second letter, then third, numbers at end ect. until no change in 2 passes, sort via maximum
-    //none: general display 
+    if none sort ascend 
+    ascend: numbers smallest to largest, Goes first letter, then second letter, then third, ect. until no change in 2 passes, sort via minimum
+    descend: Goes first letter, then second letter, then third, numbers at end ect. until no change in 2 passes, sort via maximum
+    none: general display
+    after sorting gets index of each item from original array(find name in array) and then uses that for reference for
+    index of other 2 arrays*/
+//if SORTER = alpha (currently so   rted alphabetically)
+    //then: create 3 new arrays forloop -> i=item.length, i>0, i--
+        // newitem.push(item array at i)
+
 
 //Sorts by number
     /*Checks current sorting style, if sorted by number smallest change to largest, if largest cancel sort
-    if none sort smallest */
-    //smallest: smallest number first, change by min value (if same amount sort by alpha)
-    //largest: largest number first, change by max value (if same amount sort by alpha)
+    if none sort smallest
+    smallest: smallest number first, change by min value (if same amount sort by alpha)
+    largest: largest number first, change by max value (if same amount sort by alpha)
+    After sorting finds the amount of each item in original array and gets index value, uses this for other 2
+    arrays*/
 
 
 //Sorts by location
-    //same as alpha sorter but location column instead of name, if same loction then go by alpha
+    //same as alpha sorter but location column instead of name
+        //Different arrays for 
 
 //Search bar
-    //search name and location for substring, if found the item stays in table, otherwise removed from table
+    //for length of array, see if item name or location includes key, if true: get index (loop counter)
+    //for the set of items, put into new arrays, displays arrays

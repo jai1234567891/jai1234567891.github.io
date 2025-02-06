@@ -1,0 +1,21 @@
+//arrays
+    //Name array (stores name of items)
+    //amount array (stores the amount of each item)
+    //location array (stores location of each item)
+let item = []
+let amount = []
+let location = []
+
+//updateAmount(updates amount based on text input)
+    // first gets array index of the item being updated, then goes to number array at that index 
+    // and then changes that value
+
+//addItem (adds item to arrays)
+function addItem(theItem,theCount,theLocation)
+{
+    item.push(theItem)
+    amount.push(theCount)
+    location.push(theLocation)
+}
+
+//remove item (removes item from array)
