@@ -2,17 +2,40 @@
 let sorter = "none"
 
 //Sorts by name 
-    /*Checks current sorting style, if sorted by alpha ascend change to descen, if descend cancel sort
+    /*Checks current sorting style, if sorted by alpha ascend change to reverse, if reverse cancel sort
     if none sort ascend 
     ascend: numbers smallest to largest, Goes first letter, then second letter, then third, ect. until no change in 2 passes, sort via minimum
-    descend: Goes first letter, then second letter, then third, numbers at end ect. until no change in 2 passes, sort via maximum
-    none: general display
-    after sorting gets index of each item from original array(find name in array) and then uses that for reference for
-    index of other 2 arrays*/
-//if SORTER = alpha (currently so   rted alphabetically)
-    //then: create 3 new arrays forloop -> i=item.length, i>0, i--
-        // newitem.push(item array at i)
+    reversed: reverse alpha sort (last starts, ends with first)
+    none: general display*/
 
+//if SORTER = alpha (currently sorted alphabetically)
+    //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
+        // newItem.push(item array at i)
+        // newAmount.push(amount array at i)
+        // newLocation.push (loc array at i)
+    //set sorter to reversed alphabetical 
+    //return 3 new arrays
+
+//else if SORTER = reversed (currently sorted reversed)
+    //then: 
+    //set sorter to none
+    //return initial arrays
+
+//else (currently not sorted or some other sort)
+    //create new arrays
+    //then:
+    //for i=0, i<=legnth of array, i++
+        //if(begins with number)
+            //number array.push item.at(i)
+        //else
+            //letterarry.push(item.at(i))
+    //newitemarray.push(numberarray(by number(difference between a and b)).sort)
+    //newitemarray.push(letterarray.sort)
+    //for i=0, i<=length of array, i++
+        //newamountarray.push(amount.at(items.indexOf(newitemarray.at(i)))
+        //newlocarray.push(location.at(items.indexOf(newitemarray.at(i)))
+    //set sorter to alphabetical
+    //return 3 new arrays
 
 //Sorts by number
     /*Checks current sorting style, if sorted by number smallest change to largest, if largest cancel sort
@@ -22,11 +45,69 @@ let sorter = "none"
     After sorting finds the amount of each item in original array and gets index value, uses this for other 2
     arrays*/
 
+//if sorter = smallest (smallest put first)
+    //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
+        // newItem.push(item array at i)
+        // newAmount.push(amount array at i)
+        // newLocation.push (loc array at i)
+    //set sorter to largest 
+    //return 3 new arrays
+
+//else if SORTER = largest (currently sorted largest)
+    //then: 
+    //set sorter to none
+    //return initial arrays
+
+//else (currently not sorted or some other sort)
+    //create new arrays
+    //then:
+    //newamountarray.push(amount.tosort(a,b(difference (a-b)))
+    //for i=0, i<=length of array, i++
+        //newitemarray.push(amount.at(amount.indexOf(newamountarry.at(i)))
+        //newlocarray.push(location.at(amount.indexOf(newamountarray.at(i)))
+    //set sorter to smallest
+    //return 3 new arrays    
 
 //Sorts by location
     //same as alpha sorter but location column instead of name
-        //Different arrays for 
+        //get all locations
+            //create key var = ""
+            //for i=0, i<=length, i++
+                //if !object(key,location.at(i))
+                    //sortlocations.push(location.at(i))
+                    //key = location.at(i)
+            //sortlocations.sort()
+        //having gotten locations, sort items by alpha
+            //create new arrays
+            //then:
+            //for i=0, i<=legnth of array, i++
+            //if(begins with number)
+                //number array.push item.at(i)
+            //else
+                //letterarry.push(item.at(i))
+           //newitemarray.push(sort numberarray(by number(difference between a and b)))
+           //newitemarray.push(sort item)
+           //for i=0, i<=length of array, i++
+               //amountarray.push(amount.at(items.indexOf(newitemarray.at(i)))
+               //locarray.push(location.at(items.indexOf(newitemarray.at(i)))
+        //match sorted locs with sorted alpha, push to final array
+            //for i=1, i<= sortlocations.length, i++
+                // for a=1, i<= locations.length, a++
+                    //if (Object(sortlocations.at(i),location.at(a)))
+                        //newamountarray.push(amountarray.at(a))
+                        //newlocarray.push(sortlocations.at(i))
+                        //newitemarray.push(itemarray.at(a)))
+        //return newamountarray,newlocarray,newitemarray
 
 //Search bar
     //for length of array, see if item name or location includes key, if true: get index (loop counter)
     //for the set of items, put into new arrays, displays arrays
+    //fucntion search(textboxstring)
+        //create filtitem,filtamount,filtloc,
+        //for i=0; i<item.length; i++
+            //if(item.includes(textboxstring)||location.includes(textboxstring))
+                //filtitem = item.at(i)
+                //filtamount = amount.at(i)
+                //filtloc = amount.at(i)
+        //return filtitemarray,filtamountarray,filtlocarray
+        

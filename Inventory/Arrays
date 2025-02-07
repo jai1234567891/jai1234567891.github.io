@@ -19,3 +19,8 @@ function addItem(theItem,theCount,theLocation)
 }
 
 //remove item (removes item from array)
+    //splice it out
+    //get item name, find it in list (or potentially just get it from the row # if possible)
+        //item.splice(index,index)
+        //item.splice(index,index)
+        //item.splice(index,index)
