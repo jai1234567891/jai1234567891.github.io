@@ -12,7 +12,7 @@ let location = []
 
 //addItem (adds item to arrays)
 function addItem(theItem,theCount,theLocation)
-{
+{ 
     item.push(theItem)
     amount.push(theCount)
     location.push(theLocation)
