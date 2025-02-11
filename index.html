@@ -2,10 +2,20 @@
 <html>
    <head>
       <style>
-      table,th,tr{
-         border: 2px solid rgb(235, 21, 21);
+      table,th,tr{ 
+         border: 2px solid black;
          border-collapse: collapse;
       }
+      .button{
+         background-color:lightgray;
+         border: 1px solid black;
+         color:black;
+      }
+      .button2{
+         background-color: transparent;
+         border:none;
+      }
+
       </style>
       
       <body>
@@ -14,11 +24,14 @@
       <!-- creates the table based on array values-->
          <table style="width: 100%;">
             <tr>
-               <th style = "width:45%"> Name</th>
-               <th style = "width:10%">Amount</th>
-               <th style = "width:40%">Location</th>
-               <th style = "width:5%"></th>
-
+               <th style = "width:37%"> <button class="button2"> Name </button></th>
+               <th style = "width:10%"> <button class="button2"> Amount </button></th>
+               <th style = "width:5%"> <button class= "button"> ↟ </button> <!--button to add item amount--></th>
+               <th style = "width:7%"> <!--text box--></th>
+               <th style = "width:5%"> <button class= "button"> ↡ </button> <!-- button to remove item amount--></th>
+               <th style = "width:31%"> <button class="button2"> Location </button></th>
+               <th style = "width:5%"> <button class = "button"> 🗑️</button> <!--button for item removal-->
+               </th>
             </tr>
          <!-- get length of array, put into for loop going for length, get array item based on loop count
           display each array with index of loop count-->

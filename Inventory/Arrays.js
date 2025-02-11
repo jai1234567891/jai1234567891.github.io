@@ -7,8 +7,11 @@ let amount = []
 let location = []
 
 //updateAmount(updates amount based on text input)
-    // first gets array index of the item being updated, then goes to number array at that index 
-    // and then changes that value
+    // updates amount in amount array based on text box input
+    //requires: name of item being updated (name imported based on point in table)
+function updateAmount(newAmount,itemName){
+    amount.at(item.indexOf(itemName)) = newAmount
+}
 
 //addItem (adds item to arrays)
 function addItem(theItem,theCount,theLocation)
@@ -24,3 +27,8 @@ function addItem(theItem,theCount,theLocation)
         //item.splice(index,index)
         //item.splice(index,index)
         //item.splice(index,index)
+function removeItem(itemName){
+    item.splice(item.indexOf(itemName),1)
+    amount.splice(item.indexOf(itemName),1)
+    location.splice(item.indexOf(itemName),1)
+}

@@ -293,3 +293,4 @@ function searchBar(item,amount,location,key){
     }
     return [newItem, newAmount, newLocation]
 }
+
