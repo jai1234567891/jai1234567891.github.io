@@ -2,15 +2,25 @@
     //Name array (stores name of items)
     //amount array (stores the amount of each item)
     //location array (stores location of each item)
-let item = []
-let amount = []
-let location = []
+export let item = ["ties","scissors",'wires','pliers']
+export let amount = ["1","3","5","2"]
+export let location = ["loc1","lo2","lo4","lo3"]
 
 //updateAmount(updates amount based on text input)
     // updates amount in amount array based on text box input
     //requires: name of item being updated (name imported based on point in table)
 function updateAmount(newAmount,itemName){
     amount.at(item.indexOf(itemName)) = newAmount
+}
+
+window.getItem = function getItem(){
+    return [item]
+}
+window.getItem = function getAmount(){
+    return [amount]
+}
+window.getItem = function getLocation(){
+    return [location]
 }
 
 //addItem (adds item to arrays)
@@ -32,3 +42,13 @@ function removeItem(itemName){
     amount.splice(item.indexOf(itemName),1)
     location.splice(item.indexOf(itemName),1)
 }
+
+//table creaation:
+    //get elements for the table
+    //set constants for document elements
+    //create row+cells
+        //for(i=0; i<item.legnth; i++) for loop for each column
+            //create new row (create element tr)
+            //for(i=0, i<=rows in init table; i++)
+                //create element td
+                //create cell text ()

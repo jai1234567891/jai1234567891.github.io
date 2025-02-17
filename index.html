@@ -2,37 +2,67 @@
 <html>
    <head>
       <style>
-      table,th,tr{ 
+      table,th,td,tr{ 
          border: 2px solid black;
          border-collapse: collapse;
+         background-color: white;
+      }
+      td:nth-child(1){
+        width:37%;
+      }
+      td:nth-child(2){
+         width:10%;
+      }
+      td:nth-child(3){
+         width:5%;
+      }
+      td:nth-child(4){
+         width:7%;
+      }
+      td:nth-child(5){
+         width:5%;
+      }
+      td:nth-child(6){
+         width:31%;
+      }
+      td:nth-child(7){
+         width:5%;
       }
       .button{
          background-color:lightgray;
          border: 1px solid black;
          color:black;
+         border-radius: 15%;
+      }
+      .button:active{
+         transform:translateY(1.5px);
+         background-color: grey;
       }
       .button2{
          background-color: transparent;
          border:none;
+         color: black;
       }
 
       </style>
-      
       <body>
+         <script type = "text/javascript" src="Inventory/Arrays.js"></script>
+         <script type = "text/javascript" src="Sorter.js"></script>
          <h1>GearCats Electrical Inventory</h1>
 
       <!-- creates the table based on array values-->
-         <table style="width: 100%;">
+         <table style="width: 100%;"; class="Tables1">
+   
             <tr>
-               <th style = "width:37%"> <button class="button2"> Name </button></th>
+               <th style = "width:37%"> <button class="button2" onclick="sorter()"> Name </button></th>
                <th style = "width:10%"> <button class="button2"> Amount </button></th>
                <th style = "width:5%"> <button class= "button"> ↟ </button> <!--button to add item amount--></th>
                <th style = "width:7%"> <!--text box--></th>
                <th style = "width:5%"> <button class= "button"> ↡ </button> <!-- button to remove item amount--></th>
                <th style = "width:31%"> <button class="button2"> Location </button></th>
-               <th style = "width:5%"> <button class = "button"> 🗑️</button> <!--button for item removal-->
-               </th>
+               <th style = "width:5%"> <button class = "button"> 🗑️ </button> <!--button for item removal--></th>
             </tr>
+         </table>
          <!-- get length of array, put into for loop going for length, get array item based on loop count
           display each array with index of loop count-->
 
@@ -46,6 +76,51 @@
 
       <!--on button click of name column, sort alphabetically ascending, descending,-->
          <!--Script called by sorter name method-->
+         <!--needs to create table based on output-->
+         <script>
+            function sorter() {
+               let output = []
+               output = alphaSort(getItem(), getAmount(), getLocation());
+               let itemSorted = output[0]
+               let amountSorted = output[1]
+               let locationSorted = output[2]
+               const body = document.body;
+                     tbl = document.createElement('table');
+                     tbl.style.width = '100%'
+               //append row to tables1
+               for(let i=1; i<=itemSorted.length;i++){
+                  //creating buttons for the table
+                  const button1 = document.createElement('button');
+                  button1.innerHTML = "↟";
+                  button1.onclick = function(){}
+
+                  const button2 = document.createElement('button');
+                  button2.innerHTML = "↡";
+                  button2.onclick = function(){}
+
+                  const button3 = document.createElement('button');
+                  button3.innerHTML = "🗑️";
+                  button3.onclick = function(){}
+                  
+                  const tr = tbl.insertrow()
+                  var td = tr.insertCell()
+                  td.appendChild(document.createTextNode(itemSorted[i]))
+                  td = tr.insertCell()
+                  td.appendChild(document.createTextNode(amountSorted[i]))
+                  td = tr.insertCell()
+                  td.appendChild(button1)
+                  td = tr.insertCell()
+                  td.appendChild(document.createTextNode("placeholer"))
+                  td = tr.insertCell()
+                  td.appendChild(button2)
+                  td = tr.insertCell()
+                  td.appendChild(createTextNode(locationSorted[i]))
+                  td = tr.insertCell()
+                  td.appendChild(button3)
+               }
+               body.appendChild(tbl);
+            }
+         </script>
 
       <!--on button click of amount column, sort via number smallest, largest, none,-->
          <!--Script called by sorter amount method-->
