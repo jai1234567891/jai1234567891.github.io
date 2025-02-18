@@ -4,7 +4,7 @@
     //location array (stores location of each item)
 let item = ["ties","scissors",'wires','pliers']
 let amount = ["1","3","5","2"]
-let place = ["loc1","lo2","lo4","lo3"]
+let place = ["loc1","loc1","lo4","lo3"]
 
 //updateAmount(updates amount based on text input)
     // updates amount in amount array based on text box input

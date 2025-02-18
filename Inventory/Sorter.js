@@ -12,6 +12,10 @@ let sorter="none"
     //output: returns the sorted array, or cancels sort
     
 function alphaSort(theItem,theAmount,theLocation){
+    /*let attempt = document.createElement("p")
+    attempt.textContent(`$sorter`)
+    let tp = document.body
+    tp.appendChild(attempt)*/
     //if SORTER = alpha (currently sorted alphabetically)
         //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
             // newItem.push(item array at i)
@@ -19,7 +23,6 @@ function alphaSort(theItem,theAmount,theLocation){
             // newLocation.push (loc array at i)
         //set sorter to reversed alphabetical 
         //return 3 new arrays
-            
     if (sorter === "alphabetical"){ //if sorted alphabetical already, change to reversed
         sorter="none"
         let output=[]
@@ -71,7 +74,7 @@ function alphaSort(theItem,theAmount,theLocation){
         let letterItem = []
         let number = []
         let sortedNumber = []
-        for(let i = 0; i<item.length; i++){
+        for(let i = 0; i<theItem.length; i++){
             if(theItem[i].startsWith("1")||theItem[i].startsWith("2")||theItem[i].startsWith("3")||theItem[i].startsWith("4")||item[i].startsWith("5")||item[i].startsWith("6")||
             theItem[i].startsWith("7")||theItem[i].startsWith("8")||theItem[i].startsWith("9")||theItem[i].startsWith("0")){
                 numberItem.push(theItem.at(i))
@@ -146,14 +149,20 @@ function alphaSort(theItem,theAmount,theLocation){
         //set sorter to largest 
         //return 3 new arrays
     function numberSort (theItem, theAmount, theLocation){
-        if (Object(sorter,"smallest")){
-            newItem = []
-            newAmount = []
-            newLocation = []
-            for(let i = theAmount.length-1; i>=0; i--){
-                newItem.push(theItem[i])
-                newAmount.push(theAmount[i])
-                newLocation.push(theLocation[i])
+        if (sorter === "smallest"){
+            sorter="none"
+            let output=[]
+            output = numberSort(theItem,theAmount,theLocation)
+            let reverseItem = output[0]
+            let reverseAmount = output[1]
+            let reverseLocation = output[2]
+            let newItem = []
+            let newAmount = []
+            let newLocation = []
+            for(let i = reverseItem.length-1; i>=0; i--){
+                newItem.push(reverseItem.at(i))
+                newAmount.push(reverseAmount.at(i))
+                newLocation.push(reverseLocation.at(i))
             }
             sorter = "largest"
             return [newItem,newAmount,newLocation]
@@ -163,7 +172,7 @@ function alphaSort(theItem,theAmount,theLocation){
         //then: 
         //set sorter to none
         //return initial arrays
-        else if (Object(sorter,"largest")){
+        else if (sorter === "largest"){
             sorter = "none"
             return [theItem, theAmount, theLocation]
         }
@@ -178,11 +187,11 @@ function alphaSort(theItem,theAmount,theLocation){
         //set sorter to smallest
         //return 3 new arrays 
         else{
-            newItem = []
-            newAmount = []
-            newLocation =[]
-            newAmount = theAmount.toSort((a,b) => a-b)
-            for (let i=0; i<amount.length; i++){
+            let newItem = []
+            let newAmount = []
+            let newLocation =[]
+            newAmount = theAmount.toSorted((a,b) => a-b)
+            for (let i=0; i<theAmount.length; i++){
                 newItem.push(theItem.at(theAmount.indexOf(newAmount[i])))
                 newLocation.push(theLocation.at(theAmount.indexOf(newAmount)))
             }
@@ -195,7 +204,7 @@ function alphaSort(theItem,theAmount,theLocation){
         //same as alpha sorter but location array instead of name array
     
     function locationSort(theItem,theAmount,theLocation){
-        if(Object(sorter, "alphabetically by location")){ //already sorted alpha by loc, so needs to be reversed
+        if(sorter === "alphabetically by location"){ //already sorted alpha by loc, so needs to be reversed
             //reverse locations, then run sort by alpha 
             let newItem = []
             let newAmount = []
@@ -206,34 +215,48 @@ function alphaSort(theItem,theAmount,theLocation){
             //for i=length-1, i>=0, i--
                 //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
                     //sortlocations.push(location.at(i))
-                //sortlocations.sort()
+            //sortlocations.sort()
             let sortLocations = []
             for (let i = theLocation.length-1; i>=0; i--){
                 if (!sortLocations.includes(theLocation[i])){
-                    sortLocations.push(theLocation[i])
+                        sortLocations.push(theLocation[i])
                 }
             }
             sortLocations.sort().reverse() //revsers the sort
-            //having sorted locations by alpha, need to get all values with that location, and sort them alphabetically, then push to final arrays in order
             for(let i=0; i<sortLocations.length;i++){
+                sorter = "none"
+                let currentItem = []
+                let currentAmount = []
                 let currentLocation = []
-                for(a=0; a<theLocation.length;a++){
-                    if(Object(sortLocations[i],theLocation[a])){
-                        currentLocation.push(theItem[a])
+                for(let a=0; a<theLocation.length;a++){
+                    if(sortLocations[i] === theLocation[a]){
+                        currentItem.push(theItem.at(a))
+                        currentAmount.push(theAmount.at(a))
+                        currentLocation.push(theLocation.at(a))
                     }
                 }
+                
                 //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-                returned = alphaSort(currentLocation,theAmount,theLocation)
-                newItem.push(returned[0])
-                newAmount.push(returned[1])
-                newLocation.push(returned[2])
+
+                returned = alphaSort(currentItem,currentAmount,currentLocation)
+                let sortedLocations = []
+                let sortedItems = []
+                let sortedAmount = []
+                sortedItems = returned[0]
+                sortedAmount = returned[1]
+                sortedLocations = returned[2]
+                for (let a = 0; a<sortedItems.length; a++){
+                    newItem.push(sortedItems[a])
+                    newAmount.push(sortedAmount[a])
+                    newLocation.push(sortedLocations[a])
+                }
             }
             sorter = "reversed alphabetically by location"
             return[newItem,newAmount,newLocation]
         }
-    
+        
         //unsort
-        else if(Object(sorter,"reversed alphabetically by location")){
+        else if(sorter === "reversed alphabetically by location"){
             sorter = "none"
             return [theItem, theAmount, theLocation]
         }
@@ -253,29 +276,44 @@ function alphaSort(theItem,theAmount,theLocation){
             let sortLocations = []
             for (let i =0; i<theLocation.length; i++){
                 if (!sortLocations.includes(theLocation[i])){
-                    sortLocations.push(thelocation[i])
+                    sortLocations.push(theLocation[i])
                 }
             }
-            sortLocations.sort 
+            sortLocations.sort()
+            //console.log(sortLocations)
             //having sorted locations by alpha, need to get all values with that location, and sort them alphabetically, then push to final arrays in order
             for(let i=0; i<sortLocations.length;i++){
+                sorter = "none"
+                let currentItem = []
+                let currentAmount = []
                 let currentLocation = []
-                for(a=0; a<theLocation.length;a++){
-                    if(Object(sortLocations[i],theLocation[a])){
-                        currentLocation.push(theItem[a])
+                for(let a=0; a<theLocation.length;a++){
+                    if(sortLocations[i] === theLocation[a]){
+                        currentItem.push(theItem.at(a))
+                        currentAmount.push(theAmount.at(a))
+                        currentLocation.push(theLocation.at(a))
                     }
                 }
+                
                 //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-                returned = alphaSort(currentLocation,theAmount,theLocation)
-                newItem.push(returned[0])
-                newAmount.push(returned[1])
-                newLocation.push(returned[2])
+
+                returned = alphaSort(currentItem,currentAmount,currentLocation)
+                let sortedLocations = []
+                let sortedItems = []
+                let sortedAmount = []
+                sortedItems = returned[0]
+                sortedAmount = returned[1]
+                sortedLocations = returned[2]
+                for (let a = 0; a<sortedItems.length; a++){
+                    newItem.push(sortedItems[a])
+                    newAmount.push(sortedAmount[a])
+                    newLocation.push(sortedLocations[a])
+                }
             }
             sorter = "alphabetically by location"
             return[newItem,newAmount,newLocation]
         }
-    }
-            
+    }            
     //Search bar
         //for length of array, see if item name or location includes key, if true: get index (loop counter)
         //for the set of items, put into new arrays, displays arrays
