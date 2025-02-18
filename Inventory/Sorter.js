@@ -21,13 +21,19 @@ function alphaSort(theItem,theAmount,theLocation){
         //return 3 new arrays
             
     if (sorter === "alphabetical"){ //if sorted alphabetical already, change to reversed
+        sorter="none"
+        let output=[]
+        output = alphaSort(theItem,theAmount,theLocation)
+        let reverseItem = output[0]
+        let reverseAmount = output[1]
+        let reverseLocation = output[2]
         let newItem = []
         let newAmount = []
         let newLocation = []
-        for(let i = item.length-1; i>=0; i--){
-            newItem.push(theItem.at(i))
-            newAmount.push(theAmount.at(i))
-            newLocation.push(theLocation.at(i))
+        for(let i = reverseItem.length-1; i>=0; i--){
+            newItem.push(reverseItem.at(i))
+            newAmount.push(reverseAmount.at(i))
+            newLocation.push(reverseLocation.at(i))
         }
         sorter = "reversed"
         return [newItem,newAmount,newLocation]

@@ -53,7 +53,7 @@
          <!-- creates the table based on array values-->
          <table style="width: 100%;"; class="Tables1">
             <tr>
-               <th style = "width:37%"> <button class="button" onclick="sort()"> Name </button></th>
+               <th style = "width:37%"> <button class="button2" onclick="sort()"> Name </button></th>
                <th style = "width:10%"> <button class="button2"> Amount </button></th>
                <th style = "width:5%"> <button class= "button" onclick="sort()"> ↟ </button> <!--button to add item amount--></th>
                <th style = "width:7%"> <!--text box--></th>
@@ -64,7 +64,7 @@
             <!-- get length of array, put into for loop going for length, get array item based on loop count
           display each array with index of loop count-->
          </table>
-
+         
          <script type = "text/javascript">
             function sort() {
                let output = []
@@ -72,10 +72,16 @@
                let itemSorted = output[0]
                let amountSorted = output[1]
                let locationSorted = output[2]
+               tableCreate(itemSorted,amountSorted,locationSorted)
+            }
+         </script>
+
+         <script type = "text/javascript">
+            function tableCreate(theItem,theAmount,theLocation){   
                let body = document.body;
                tbl = document.createElement('table');
                tbl.style.width = '100px';
-               for(let i=0; i<itemSorted.length;i++){ //table lenght =amount of items
+               for(let i=0; i<theItem.length;i++){ //table lenght =amount of items
                   const tr = tbl.insertRow()
                   //creating buttons for the table
                   const button1 = document.createElement('button');
@@ -91,9 +97,9 @@
                   button3.onclick = function(){}
                   //creating the table (create cell for each item)
                   td1 = tr.insertCell()
-                  td1.appendChild(document.createTextNode(`${itemSorted.at(i)}`))
+                  td1.appendChild(document.createTextNode(`${theItem.at(i)}`))
                   td2 = tr.insertCell()
-                  td2.appendChild(document.createTextNode(`${amountSorted.at(i)}`))
+                  td2.appendChild(document.createTextNode(`${theAmount.at(i)}`))
                   td3 = tr.insertCell()
                   td3.appendChild(button1)
                   td4 = tr.insertCell()
@@ -101,7 +107,7 @@
                   td5 = tr.insertCell()
                   td5.appendChild(button2)
                   td6 = tr.insertCell()
-                  td6.appendChild(document.createTextNode(`${locationSorted.at(i)}`))
+                  td6.appendChild(document.createTextNode(`${theLocation.at(i)}`))
                   td7 = tr.insertCell()
                   td7.appendChild(button3)
                }
