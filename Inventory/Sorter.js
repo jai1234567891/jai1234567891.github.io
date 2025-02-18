@@ -1,5 +1,5 @@
 //variable for current sorting status
-sorter="none"
+let sorter="none"
 
 //Sorts by name 
     /*Checks current sorting style, if sorted by alpha ascend change to reverse, if reverse cancel sort
@@ -11,117 +11,117 @@ sorter="none"
     //input: item, amount, location arrays
     //output: returns the sorted array, or cancels sort
     
-    function alphaSort(theItem,theAmount,theLocation){
-        //if SORTER = alpha (currently sorted alphabetically)
-            //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
-                // newItem.push(item array at i)
-                // newAmount.push(amount array at i)
-                // newLocation.push (loc array at i)
-            //set sorter to reversed alphabetical 
-            //return 3 new arrays
-            
-        if (sorter === "alphabetical"){ //if sorted alphabetical already, change to reversed
-            let newItem = []
-            let newAmount = []
-            let newLocation = []
-            for(let i = item.length-1; i>=0; i--){
-                newItem.push(theItem.at(i))
-                newAmount.push(theAmount.at(i))
-                newLocation.push(theLocation.at(i))
-            }
-            sorter = "reversed"
-            return [newItem,newAmount,newLocation]
-        }
-    
-        //else if SORTER = reversed (currently sorted reversed)
-        //then:
-        //set sorter to none
-        //return initial arrays
-        else if (sorter==="reversed"){
-            sorter = "none"
-            return [theItem, theAmount, theLocation]
-        }
-    
-        //else (currently not sorted or some other sort)
-        //create new arrays
-        //then:
-        //for i=0, i<=legnth of array, i++
-            //if(begins with number)
-                //number array.push item.at(i)
-            //else
-                //letterarry.push(item.at(i))
-        //newitemarray.push(numberarray(by number(difference between a and b)).sort)
-        //newitemarray.push(letterarray.sort)
-        //for i=0, i<=length of array, i++
-            //newamountarray.push(amount.at(items.indexOf(newitemarray.at(i)))
-            //newlocarray.push(location.at(items.indexOf(newitemarray.at(i)))
-        //set sorter to alphabetical
+function alphaSort(theItem,theAmount,theLocation){
+    //if SORTER = alpha (currently sorted alphabetically)
+        //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
+            // newItem.push(item array at i)
+            // newAmount.push(amount array at i)
+            // newLocation.push (loc array at i)
+        //set sorter to reversed alphabetical 
         //return 3 new arrays
-        else{
-            let newItem = []
-            let newAmount = []
-            let newLocation = []
-            let numberItem = []
-            let letterItem = []
-            let number = []
-            let sortedNumber = []
-            for(let i = 0; i<item.length; i++){
-                if(theItem[i].startsWith("1")||theItem[i].startsWith("2")||theItem[i].startsWith("3")||theItem[i].startsWith("4")||item[i].startsWith("5")||item[i].startsWith("6")||
-                theItem[i].startsWith("7")||theItem[i].startsWith("8")||theItem[i].startsWith("9")||theItem[i].startsWith("0")){
-                    numberItem.push(theItem.at(i))
-                }
-                else{
-                    letterItem.push(theItem[i])
-                }
-            }
-            //Isolating the numbers, converting to decimal if presented in fraction
-            for(let i = 0; i<numberItem.length; i++){
-                if(numberItem[i].includes("/")){
-                    let slash = 0
-                    slash = numberItem[i].indexOf("/")
-                    let indexs = 0
-                    for(let a = 0; a<=9; a++){
-                        if (numberItem[i].indexOf(a.toString())>indexs){
-                            indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
-                        }
-                    }
-                    number.push(numberItem[i].substring(0,slash)/numberItem[i].substring(slash+1,indexs+1)) //converts frac to decimal and adds it
-                }
-                else{ //doesnt include "/"
-                    let indexs = 0
-                    for(let a = 0; a<=9; a++){
-                        if (numberItem[i].indexOf(a.toString())>indexs){
-                            indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
-                        }
-                    }
-                    number.push(numberItem[i].substring(0,indexs+1))
-                }
-            }
-            sortedNumber = number.toSorted((a,b) => a-b) //sorts by smallest to largest
-            //find sorted number in index of number, get value of numberItem at that index, find that value in main, search main arrays at 
-            //that index, put those values into new arrays so that numbers come first
-            for(let i=0; i<numberItem.length; i++){
-                let index = 0
-                index = number.indexOf(sortedNumber.at(i)) //get index of sorted number in number
-                index = theItem.indexOf(numberItem.at(index))
-                newItem.push(theItem.at(index))
-                newAmount.push(theAmount.at(index))
-                newLocation.push(theLocation.at(index))
-            }
-            //add in sorted items
-            let theSorted = letterItem.toSorted();
-            for(let i=0; i<letterItem.length;i++){
-                let index = 0
-                index = letterItem.indexOf((theSorted.at(i)))
-                index = theItem.indexOf(letterItem[index])
-                newItem.push(theItem.at(index))
-                newAmount.push(theAmount.at(index))
-                newLocation.push(theLocation.at(index))
-            }
-            sorter = "alphabetical"
-            return [newItem,newAmount,newLocation]
+            
+    if (sorter === "alphabetical"){ //if sorted alphabetical already, change to reversed
+        let newItem = []
+        let newAmount = []
+        let newLocation = []
+        for(let i = item.length-1; i>=0; i--){
+            newItem.push(theItem.at(i))
+            newAmount.push(theAmount.at(i))
+            newLocation.push(theLocation.at(i))
         }
+        sorter = "reversed"
+        return [newItem,newAmount,newLocation]
     }
+    
+    //else if SORTER = reversed (currently sorted reversed)
+    //then:
+    //set sorter to none
+    //return initial arrays
+    else if (sorter==="reversed"){
+        sorter = "none"
+        return [theItem, theAmount, theLocation]
+    }
+    
+    //else (currently not sorted or some other sort)
+    //create new arrays
+    //then:
+    //for i=0, i<=legnth of array, i++
+        //if(begins with number)
+            //number array.push item.at(i)
+        //else
+            //letterarry.push(item.at(i))
+    //newitemarray.push(numberarray(by number(difference between a and b)).sort)
+    //newitemarray.push(letterarray.sort)
+    //for i=0, i<=length of array, i++
+        //newamountarray.push(amount.at(items.indexOf(newitemarray.at(i)))
+        //newlocarray.push(location.at(items.indexOf(newitemarray.at(i)))
+    //set sorter to alphabetical
+    //return 3 new arrays
+    else{
+        let newItem = []
+        let newAmount = []
+        let newLocation = []
+        let numberItem = []
+        let letterItem = []
+        let number = []
+        let sortedNumber = []
+        for(let i = 0; i<item.length; i++){
+            if(theItem[i].startsWith("1")||theItem[i].startsWith("2")||theItem[i].startsWith("3")||theItem[i].startsWith("4")||item[i].startsWith("5")||item[i].startsWith("6")||
+            theItem[i].startsWith("7")||theItem[i].startsWith("8")||theItem[i].startsWith("9")||theItem[i].startsWith("0")){
+                numberItem.push(theItem.at(i))
+            }
+            else{
+                letterItem.push(theItem[i])
+            }
+        }
+        //Isolating the numbers, converting to decimal if presented in fraction
+        for(let i = 0; i<numberItem.length; i++){
+            if(numberItem[i].includes("/")){
+                let slash = 0
+                slash = numberItem[i].indexOf("/")
+                let indexs = 0
+                for(let a = 0; a<=9; a++){
+                    if (numberItem[i].indexOf(a.toString())>indexs){
+                        indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
+                    }
+                }
+                number.push(numberItem[i].substring(0,slash)/numberItem[i].substring(slash+1,indexs+1)) //converts frac to decimal and adds it
+            }
+            else{ //doesnt include "/"
+                let indexs = 0
+                for(let a = 0; a<=9; a++){
+                    if (numberItem[i].indexOf(a.toString())>indexs){
+                        indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
+                    }
+                }
+                number.push(numberItem[i].substring(0,indexs+1))
+            }
+        }
+        sortedNumber = number.toSorted((a,b) => a-b) //sorts by smallest to largest
+        //find sorted number in index of number, get value of numberItem at that index, find that value in main, search main arrays at 
+        //that index, put those values into new arrays so that numbers come first
+        for(let i=0; i<numberItem.length; i++){
+            let index = 0
+            index = number.indexOf(sortedNumber.at(i)) //get index of sorted number in number
+            index = theItem.indexOf(numberItem.at(index))
+            newItem.push(theItem.at(index))
+            newAmount.push(theAmount.at(index))
+            newLocation.push(theLocation.at(index))
+        }
+        //add in sorted items
+        let theSorted = letterItem.toSorted();
+        for(let i=0; i<letterItem.length;i++){
+            let index = 0
+            index = letterItem.indexOf((theSorted.at(i)))
+            index = theItem.indexOf(letterItem[index])
+            newItem.push(theItem.at(index))
+            newAmount.push(theAmount.at(index))
+            newLocation.push(theLocation.at(index))
+        }
+        sorter = "alphabetical"
+        return [newItem,newAmount,newLocation]
+    }
+}
     
     
     //Sorts by number
