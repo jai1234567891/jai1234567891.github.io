@@ -159,13 +159,13 @@ function alphaSort(theItem,theAmount,theLocation){
             let newItem = []
             let newAmount = []
             let newLocation = []
-            for(let i = reverseItem.length-1; i>=0; i--){
+            for(let i = (reverseItem.length-1); i>=0; i--){
                 newItem.push(reverseItem.at(i))
                 newAmount.push(reverseAmount.at(i))
                 newLocation.push(reverseLocation.at(i))
             }
             sorter = "largest"
-            return [newItem,newAmount,newLocation]
+            return [newItem, newAmount, newLocation]
         }
     
         //else if SORTER = largest (currently sorted largest)
@@ -192,13 +192,29 @@ function alphaSort(theItem,theAmount,theLocation){
             let newLocation =[]
             newAmount = theAmount.toSorted((a,b) => a-b)
             for (let i=0; i<theAmount.length; i++){
-                newItem.push(theItem.at(theAmount.indexOf(newAmount[i])))
-                newLocation.push(theLocation.at(theAmount.indexOf(newAmount)))
+                let index = 0
+                let itemCut = theItem
+                let numberCut = theAmount
+                for (let a=0; a<i; a++){//getting how many of each amount there are
+                    if(newAmount[a] == newAmount[i]){
+                        index += 1
+                    }
+                }
+                if(index>0){
+                    for (let a=0; a<index; a++){
+                        itemCut = theItem.slice(1+numberCut.indexOf(newAmount[i]))
+                        numberCut = theAmount.slice(1+numberCut.indexOf(newAmount[i]))
+                    }
+                }
+                currentItem = itemCut.at(numberCut.indexOf(newAmount[i]))
+                newItem.push(currentItem)
+                newLocation.push(theLocation.at(theItem.indexOf(currentItem))) //gets index of item in main array for finding position
             }
             sorter = "smallest"
-            return [newItem,newAmount,newLocation]
+            return [newItem, newAmount, newLocation]
         }
-    }   
+        }
+
     
     //Sorts by location
         //same as alpha sorter but location array instead of name array
@@ -326,7 +342,7 @@ function alphaSort(theItem,theAmount,theLocation){
                     //filtamount = amount.at(i)
                     //filtloc = amount.at(i)
             //return filtitemarray,filtamountarray,filtlocarray
-    function searchBar(theItem,theAmount,thelocation,key){
+    function searchBar(theItem,theAmount,theLocation,key){
         let newItem = []
         let newAmount = []
         let newLocation = []
