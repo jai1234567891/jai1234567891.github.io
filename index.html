@@ -12,6 +12,15 @@
             text-align: center;
             padding: 0;
          }
+         .table2,.td2{
+            border: 4px solid transparent;
+            border-collapse: collapse;
+            background-color: white;
+            table-layout:fixed;
+            text-align: center;
+            padding: 0;
+         }
+
          td input{
             box-sizing:border-box;
             display:block;
@@ -57,6 +66,60 @@
 
       <body>
          <script type = "text/javascript">
+            function tableCreate(theItem,theAmount,theLocation){  
+               let body = document.body;
+               tbl = document.createElement('table');
+               tbl.style.width = '100%';
+               tbl.setAttribute("id","tester");
+               for(let i=0; i<theItem.length;i++){ //table lenght =amount of items
+                  const tr = tbl.insertRow()
+                  //creating buttons for the table
+                  const button1 = document.createElement('button');
+                  button1.innerHTML = "↟";
+                  button1.classList.add ('button')
+                  button1.onclick = function(){increaseAmount(i)}
+
+                  const button2 = document.createElement('button');
+                  button2.innerHTML = "↡";
+                  button2.classList.add ('button')
+                  button2.onclick = function(){decreaseAmount(i)}
+
+                  const button3 = document.createElement('button');
+                  button3.innerHTML = "🗑️";
+                  button3.classList.add ('button')
+                  button3.onclick = function(){deleteItem(i)}
+
+                  const textBox = document.createElement('input')
+                  textBox.setAttribute("id","numberInput" + i)
+                  //creating the table (create cell for each item)
+                  td1 = tr.insertCell()
+                  td1.appendChild(document.createTextNode(`${theItem.at(i)}`))
+                  td1.style.width = "35%"
+                  td2 = tr.insertCell()
+                  td2.appendChild(document.createTextNode(`${theAmount.at(i)}`))
+                  td2.style.width = "12%"
+                  td3 = tr.insertCell()
+                  td3.appendChild(button1)
+                  td3.style.width = "5%"
+                  td4 = tr.insertCell()
+                  td4.appendChild(textBox)
+                  td4.style.width = "7%"
+                  td5 = tr.insertCell()
+                  td5.appendChild(button2)
+                  td5.style.width = "5%"
+                  td6 = tr.insertCell()
+                  td6.appendChild(document.createTextNode(`${theLocation.at(i)}`))
+                  td6.style.width = "31%"
+                  td7 = tr.insertCell()
+                  td7.appendChild(button3)
+                  td7.style.width = "5%"
+               }
+               body.appendChild(tbl)
+            }
+            tableCreate(item,amount,place)
+         </script>
+
+         <script type = "text/javascript">
             function sortByAlpha() {
                tbl.remove()
                let output = []
@@ -93,69 +156,56 @@
          </script>
 
          <script type = "text/javascript">
-            function tableCreate(theItem,theAmount,theLocation){  
-               let body = document.body;
-               tbl = document.createElement('table');
-               tbl.style.width = '100%';
-               tbl.setAttribute("id","tester");
-               for(let i=0; i<theItem.length;i++){ //table lenght =amount of items
-                  const tr = tbl.insertRow()
-                  //creating buttons for the table
-                  const button1 = document.createElement('button');
-                  button1.innerHTML = "↟";
-                  button1.classList.add ('button')
-                  button1.onclick = function(){increaseAmount(i)}
-
-                  const button2 = document.createElement('button');
-                  button2.innerHTML = "↡";
-                  button2.classList.add ('button')
-                  button2.onclick = function(){}
-
-                  const button3 = document.createElement('button');
-                  button3.innerHTML = "🗑️";
-                  button3.classList.add ('button')
-                  button3.onclick = function(){}
-
-                  const textBox = document.createElement('input')
-                  textBox.setAttribute("id","numberInput" + i)
-                  //creating the table (create cell for each item)
-                  td1 = tr.insertCell()
-                  td1.appendChild(document.createTextNode(`${theItem.at(i)}`))
-                  td1.style.width = "35%"
-                  td2 = tr.insertCell()
-                  td2.appendChild(document.createTextNode(`${theAmount.at(i)}`))
-                  td2.style.width = "12%"
-                  td3 = tr.insertCell()
-                  td3.appendChild(button1)
-                  td3.style.width = "5%"
-                  td4 = tr.insertCell()
-                  td4.appendChild(textBox)
-                  td4.style.width = "7%"
-                  td5 = tr.insertCell()
-                  td5.appendChild(button2)
-                  td5.style.width = "5%"
-                  td6 = tr.insertCell()
-                  td6.appendChild(document.createTextNode(`${theLocation.at(i)}`))
-                  td6.style.width = "31%"
-                  td7 = tr.insertCell()
-                  td7.appendChild(button3)
-                  td7.style.width = "5%"
-               }
-               body.appendChild(tbl)
-            }
-            tableCreate(item,amount,place)
-         </script>
-
-         <script type = "text/javascript">
             //function to get the value of input and which item to change
             //Get row it is in based on button click, then call update amount based on this value 
             function increaseAmount(rowNumber){
                let cellIndex = document.getElementById("tester").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                let change = document.getElementById("numberInput" + rowNumber).value
-               updateAmount(change, itemName)
-               cellIndex[1].innerHTML = change
+               cellIndex[1].innerHTML = updateAmount(change, itemName)
                }
+         </script>
+
+         <script type = "text/javascript">
+            //function to get the value of input and which item to change
+            //Get row it is in based on button click, then call update amount based on this value 
+            function decreaseAmount(rowNumber){
+               let cellIndex = document.getElementById("tester").rows[rowNumber].cells
+               let itemName = cellIndex[0].innerHTML
+               let change = document.getElementById("numberInput" + rowNumber).value
+               cellIndex[1].innerHTML = updateAmount(-1*change, itemName)
+            }
+         </script>
+
+         <script type = "text/javascript">
+            //function to get the value of input and which item to change
+            //Get row it is in based on button click, then call update amount based on this value 
+            function deleteItem(rowNumber){
+               let cellIndex = document.getElementById("tester").rows[rowNumber].cells
+               let itemName = cellIndex[0].innerHTML
+               removeItem(itemName)
+               let rowIndex = document.getElementById("tester").deleteRow(rowNumber)
+            }
+         </script>
+
+         <table style = "width:100%"; class = "table2">
+            <tr>
+               <td style = "width:35%"; class = "td2"><input type="text" id="itemBox" placeholder="Enter Item"></td>
+               <td style = "width:20%"; class = "td2"><input type = "number" id = "amountBox" placeholder="Amount"></td>
+               <td style = "width:35%"; class = "td2"><input type = "text" id = "locationBox" placeholder = "Enter Location"></td>
+               <td style = "width:10%";><button class = "button" onclick = insertItem()> Add Item</button></td>
+            </tr>
+         </table>
+
+         <script type = "text/javascript">
+            function insertItem(){
+               let newItem = document.getElementById("itemBox").value
+               let newAmount = document.getElementById("amountBox").value
+               let newLocation = document.getElementById("locationBox").value
+               addItem(newItem, newAmount, newLocation)
+               tbl.remove()
+               tableCreate(item,amount,place)
+            }
          </script>
        </body>
    </head>

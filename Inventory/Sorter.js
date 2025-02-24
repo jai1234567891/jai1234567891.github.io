@@ -133,225 +133,224 @@ function alphaSort(theItem,theAmount,theLocation){
 }
     
     
-    //Sorts by number
-        /*Checks current sorting style, if sorted by number smallest change to largest, if largest cancel sort
-        if none sort smallest
-        smallest: smallest number first, change by min value (if same amount sort by alpha)
-        largest: largest number first, change by max value (if same amount sort by alpha)
-        After sorting finds the amount of each item in original array and gets index value, uses this for other 2
-        arrays*/
+//Sorts by number
+    /*Checks current sorting style, if sorted by number smallest change to largest, if largest cancel sort
+    if none sort smallest
+    smallest: smallest number first, change by min value (if same amount sort by alpha)
+    largest: largest number first, change by max value (if same amount sort by alpha)
+    After sorting finds the amount of each item in original array and gets index value, uses this for other 2
+    arrays*/
     
-    //if sorter = smallest (smallest put first)
-        //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
-            // newItem.push(item array at i)
-            // newAmount.push(amount array at i)
-            // newLocation.push (loc array at i)
-        //set sorter to largest 
-        //return 3 new arrays
-    function numberSort (theItem, theAmount, theLocation){
-        if (sorter === "smallest"){
-            sorter="none"
-            let output=[]
-            output = numberSort(theItem,theAmount,theLocation)
-            let reverseItem = output[0]
-            let reverseAmount = output[1]
-            let reverseLocation = output[2]
-            let newItem = []
-            let newAmount = []
-            let newLocation = []
-            for(let i = (reverseItem.length-1); i>=0; i--){
-                newItem.push(reverseItem.at(i))
-                newAmount.push(reverseAmount.at(i))
-                newLocation.push(reverseLocation.at(i))
-            }
-            sorter = "largest"
-            return [newItem, newAmount, newLocation]
+//if sorter = smallest (smallest put first)
+    //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
+        // newItem.push(item array at i)
+        // newAmount.push(amount array at i)
+        // newLocation.push (loc array at i)
+    //set sorter to largest 
+    //return 3 new arrays
+function numberSort (theItem, theAmount, theLocation){
+    if (sorter === "smallest"){
+        sorter="none"
+        let output=[]
+        output = numberSort(theItem,theAmount,theLocation)
+        let reverseItem = output[0]
+        let reverseAmount = output[1]
+        let reverseLocation = output[2]
+        let newItem = []
+        let newAmount = []
+        let newLocation = []
+        for(let i = (reverseItem.length-1); i>=0; i--){
+            newItem.push(reverseItem.at(i))
+            newAmount.push(reverseAmount.at(i))
+            newLocation.push(reverseLocation.at(i))
         }
+        sorter = "largest"
+        return [newItem, newAmount, newLocation]
+    }
     
-        //else if SORTER = largest (currently sorted largest)
-        //then: 
-        //set sorter to none
-        //return initial arrays
-        else if (sorter === "largest"){
-            sorter = "none"
-            return [theItem, theAmount, theLocation]
-        }
+    //else if SORTER = largest (currently sorted largest)
+    //then: 
+    //set sorter to none
+    //return initial arrays
+    else if (sorter === "largest"){
+        sorter = "none"
+        return [theItem, theAmount, theLocation]
+    }
     
-        //else (currently not sorted or some other sort)
-        //create new arrays
-        //then:
-        //newamountarray.push(amount.tosort(a,b(difference (a-b)))
-        //for i=0, i<=length of array, i++
-            //newitemarray.push(amount.at(amount.indexOf(newamountarry.at(i)))
-            //newlocarray.push(location.at(amount.indexOf(newamountarray.at(i)))
-        //set sorter to smallest
-        //return 3 new arrays 
-        else{
-            let newItem = []
-            let newAmount = []
-            let newLocation =[]
-            newAmount = theAmount.toSorted((a,b) => a-b)
-            for (let i=0; i<theAmount.length; i++){
-                let index = 0
-                let itemCut = theItem
-                let numberCut = theAmount
-                for (let a=0; a<i; a++){//getting how many of each amount there are
-                    if(newAmount[a] == newAmount[i]){
-                        index += 1
-                    }
+    //else (currently not sorted or some other sort)
+    //create new arrays
+    //then:
+    //newamountarray.push(amount.tosort(a,b(difference (a-b)))
+    //for i=0, i<=length of array, i++
+        //newitemarray.push(amount.at(amount.indexOf(newamountarry.at(i)))
+        //newlocarray.push(location.at(amount.indexOf(newamountarray.at(i)))
+    //set sorter to smallest
+    //return 3 new arrays 
+    else{
+        let newItem = []
+        let newAmount = []
+        let newLocation =[]
+        newAmount = theAmount.toSorted((a,b) => a-b)
+        for (let i=0; i<theAmount.length; i++){
+            let index = 0
+            let itemCut = theItem
+            let numberCut = theAmount
+            for (let a=0; a<i; a++){//getting how many of each amount there are
+                if(newAmount[a] == newAmount[i]){
+                    index += 1
                 }
-                if(index>0){
-                    for (let a=0; a<index; a++){
-                        itemCut = theItem.slice(1+numberCut.indexOf(newAmount[i]))
-                        numberCut = theAmount.slice(1+numberCut.indexOf(newAmount[i]))
-                    }
-                }
-                currentItem = itemCut.at(numberCut.indexOf(newAmount[i]))
-                newItem.push(currentItem)
-                newLocation.push(theLocation.at(theItem.indexOf(currentItem))) //gets index of item in main array for finding position
             }
-            sorter = "smallest"
-            return [newItem, newAmount, newLocation]
+            if(index>0){
+                for (let a=0; a<index; a++){
+                    itemCut = itemCut.slice(1+numberCut.indexOf(newAmount[i]))
+                    numberCut = numberCut.slice(1+numberCut.indexOf(newAmount[i]))
+                }
+            }
+            currentItem = itemCut.at(numberCut.indexOf(newAmount[i]))
+            newItem.push(currentItem)
+            newLocation.push(theLocation.at(theItem.indexOf(currentItem))) //gets index of item in main array for finding position
         }
-        }
+        sorter = "smallest"
+        return [newItem, newAmount, newLocation]
+    }
+}
 
     
     //Sorts by location
         //same as alpha sorter but location array instead of name array
     
-    function locationSort(theItem,theAmount,theLocation){
-        if(sorter === "alphabetically by location"){ //already sorted alpha by loc, so needs to be reversed
-            //reverse locations, then run sort by alpha 
-            let newItem = []
-            let newAmount = []
-            let newLocation =[]
-            let returned = []
-            sorter = "none" // allows for calling to sort by alphabetical
-            //get all locations
-            //for i=length-1, i>=0, i--
-                //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
-                    //sortlocations.push(location.at(i))
-            //sortlocations.sort()
-            let sortLocations = []
-            for (let i = theLocation.length-1; i>=0; i--){
-                if (!sortLocations.includes(theLocation[i])){
-                        sortLocations.push(theLocation[i])
-                }
-            }
-            sortLocations.sort().reverse() //revsers the sort
-            for(let i=0; i<sortLocations.length;i++){
-                sorter = "none"
-                let currentItem = []
-                let currentAmount = []
-                let currentLocation = []
-                for(let a=0; a<theLocation.length;a++){
-                    if(sortLocations[i] === theLocation[a]){
-                        currentItem.push(theItem.at(a))
-                        currentAmount.push(theAmount.at(a))
-                        currentLocation.push(theLocation.at(a))
-                    }
-                }
-                
-                //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-
-                returned = alphaSort(currentItem,currentAmount,currentLocation)
-                let sortedLocations = []
-                let sortedItems = []
-                let sortedAmount = []
-                sortedItems = returned[0]
-                sortedAmount = returned[1]
-                sortedLocations = returned[2]
-                for (let a = 0; a<sortedItems.length; a++){
-                    newItem.push(sortedItems[a])
-                    newAmount.push(sortedAmount[a])
-                    newLocation.push(sortedLocations[a])
-                }
-            }
-            sorter = "reversed alphabetically by location"
-            return[newItem,newAmount,newLocation]
-        }
-        
-        //unsort
-        else if(sorter === "reversed alphabetically by location"){
-            sorter = "none"
-            return [theItem, theAmount, theLocation]
-        }
-    
-        //sort alpha by location, then sort each location by alpha
-        else{
-            let newItem = []
-            let newAmount = []
-            let newLocation =[]
-            let returned = []
-            sorter = "none" // allows for calling to sort by alphabetical
-            //get all locations
-            //for i=0, i<=length, i++
-                //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
-                    //sortlocations.push(location.at(i))
-                //sortlocations.sort()
-            let sortLocations = []
-            for (let i =0; i<theLocation.length; i++){
-                if (!sortLocations.includes(theLocation[i])){
-                    sortLocations.push(theLocation[i])
-                }
-            }
-            sortLocations.sort()
-            //console.log(sortLocations)
-            //having sorted locations by alpha, need to get all values with that location, and sort them alphabetically, then push to final arrays in order
-            for(let i=0; i<sortLocations.length;i++){
-                sorter = "none"
-                let currentItem = []
-                let currentAmount = []
-                let currentLocation = []
-                for(let a=0; a<theLocation.length;a++){
-                    if(sortLocations[i] === theLocation[a]){
-                        currentItem.push(theItem.at(a))
-                        currentAmount.push(theAmount.at(a))
-                        currentLocation.push(theLocation.at(a))
-                    }
-                }
-                
-                //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-
-                returned = alphaSort(currentItem,currentAmount,currentLocation)
-                let sortedLocations = []
-                let sortedItems = []
-                let sortedAmount = []
-                sortedItems = returned[0]
-                sortedAmount = returned[1]
-                sortedLocations = returned[2]
-                for (let a = 0; a<sortedItems.length; a++){
-                    newItem.push(sortedItems[a])
-                    newAmount.push(sortedAmount[a])
-                    newLocation.push(sortedLocations[a])
-                }
-            }
-            sorter = "alphabetically by location"
-            return[newItem,newAmount,newLocation]
-        }
-    }            
-    //Search bar
-        //for length of array, see if item name or location includes key, if true: get index (loop counter)
-        //for the set of items, put into new arrays, displays arrays
-        //pre: item,amount,location all of current array displayed (not initial)
-        //fucntion search(textboxstring)
-            //create filtitem,filtamount,filtloc,
-            //for i=0; i<item.length; i++
-                //if(item.includes(textboxstring)||location.includes(textboxstring))
-                    //filtitem = item.at(i)
-                    //filtamount = amount.at(i)
-                    //filtloc = amount.at(i)
-            //return filtitemarray,filtamountarray,filtlocarray
-    function searchBar(theItem,theAmount,theLocation,key){
+function locationSort(theItem,theAmount,theLocation){
+    if(sorter === "alphabetically by location"){ //already sorted alpha by loc, so needs to be reversed
+        //reverse locations, then run sort by alpha 
         let newItem = []
         let newAmount = []
-        let newLocation = []
-        for(let i = 0; i<theItem.length; i++){
-            if (theItem[i].includes(key)||theLocation[i].includes(key)){
-                newItem.push(theItem[i])
-                newAmount.push(theAmount[i])
-                newLocation.push(theLocation[i])
+        let newLocation =[]
+        let returned = []
+        sorter = "none" // allows for calling to sort by alphabetical
+        //get all locations
+        //for i=length-1, i>=0, i--
+            //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
+                //sortlocations.push(location.at(i))
+        //sortlocations.sort()
+        let sortLocations = []
+        for (let i = theLocation.length-1; i>=0; i--){
+            if (!sortLocations.includes(theLocation[i])){
+                sortLocations.push(theLocation[i])
             }
         }
-        return [newItem, newAmount, newLocation]
+        sortLocations.sort().reverse() //revsers the sort
+        for(let i=0; i<sortLocations.length;i++){
+            sorter = "none"
+            let currentItem = []
+            let currentAmount = []
+            let currentLocation = []
+            for(let a=0; a<theLocation.length;a++){
+                if(sortLocations[i] === theLocation[a]){
+                    currentItem.push(theItem.at(a))
+                    currentAmount.push(theAmount.at(a))
+                    currentLocation.push(theLocation.at(a))
+                }
+            }
+                
+            //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
+
+            returned = alphaSort(currentItem,currentAmount,currentLocation)
+            let sortedLocations = []
+            let sortedItems = []
+            let sortedAmount = []
+            sortedItems = returned[0]
+            sortedAmount = returned[1]
+            sortedLocations = returned[2]
+            for (let a = 0; a<sortedItems.length; a++){
+                newItem.push(sortedItems[a])
+                newAmount.push(sortedAmount[a])
+                newLocation.push(sortedLocations[a])
+            }
+        }
+        sorter = "reversed alphabetically by location"
+        return[newItem,newAmount,newLocation]
     }
+        
+        //unsort
+    else if(sorter === "reversed alphabetically by location"){
+        sorter = "none"
+        return [theItem, theAmount, theLocation]
+    }
+    
+        //sort alpha by location, then sort each location by alpha
+    else{
+        let newItem = []
+        let newAmount = []
+        let newLocation =[]
+        let returned = []
+        sorter = "none" // allows for calling to sort by alphabetical
+        //get all locations
+        //for i=0, i<=length, i++
+            //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
+                //sortlocations.push(location.at(i))
+            //sortlocations.sort()
+        let sortLocations = []
+        for (let i =0; i<theLocation.length; i++){
+            if (!sortLocations.includes(theLocation[i])){
+                sortLocations.push(theLocation[i])
+            }
+        }
+        sortLocations.sort()
+        //having sorted locations by alpha, need to get all values with that location, and sort them alphabetically, then push to final arrays in order
+        for(let i=0; i<sortLocations.length;i++){
+            sorter = "none"
+            let currentItem = []
+            let currentAmount = []
+            let currentLocation = []
+            for(let a=0; a<theLocation.length;a++){
+                if(sortLocations[i] === theLocation[a]){
+                currentItem.push(theItem.at(a))
+                    currentAmount.push(theAmount.at(a))
+                    currentLocation.push(theLocation.at(a))
+                }
+            }
+                
+            //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
+
+            returned = alphaSort(currentItem,currentAmount,currentLocation)
+            let sortedLocations = []
+            let sortedItems = []
+            let sortedAmount = []
+            sortedItems = returned[0]
+            sortedAmount = returned[1]
+            sortedLocations = returned[2]
+            for (let a = 0; a<sortedItems.length; a++){
+                newItem.push(sortedItems[a])
+                newAmount.push(sortedAmount[a])
+                newLocation.push(sortedLocations[a])
+            }
+        }
+        sorter = "alphabetically by location"
+        return[newItem,newAmount,newLocation]
+    }
+}            
+//Search bar
+    //for length of array, see if item name or location includes key, if true: get index (loop counter)
+    //for the set of items, put into new arrays, displays arrays
+    //pre: item,amount,location all of current array displayed (not initial)
+    //fucntion search(textboxstring)
+        //create filtitem,filtamount,filtloc,
+        //for i=0; i<item.length; i++
+            //if(item.includes(textboxstring)||location.includes(textboxstring))
+                //filtitem = item.at(i)
+                //filtamount = amount.at(i)
+                //filtloc = amount.at(i)
+        //return filtitemarray,filtamountarray,filtlocarray
+function searchBar(theItem,theAmount,theLocation,key){
+    let newItem = []
+    let newAmount = []
+    let newLocation = []
+    for(let i = 0; i<theItem.length; i++){
+        if (theItem[i].includes(key)||theLocation[i].includes(key)){
+            newItem.push(theItem[i])
+            newAmount.push(theAmount[i])
+            newLocation.push(theLocation[i])
+        }
+    }
+    return [newItem, newAmount, newLocation]
+}
