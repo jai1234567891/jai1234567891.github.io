@@ -254,12 +254,14 @@
 
          <script type = "text/javascript">
             function insertItem(){
-               let newItem = document.getElementById("itemBox").value
-               let newAmount = document.getElementById("amountBox").value
-               let newLocation = document.getElementById("locationBox").value
-               addItem(newItem, newAmount, newLocation)
-               tbl.remove()
-               tableCreate(item,amount,place)
+               if(!(document.getElementById("itemBox").value === '' || document.getElementById("amountBox").value === '' || document.getElementById("locationBox").value === '')){
+                  let newItem = document.getElementById("itemBox").value
+                  let newAmount = document.getElementById("amountBox").value
+                  let newLocation = document.getElementById("locationBox").value
+                  addItem(newItem, newAmount, newLocation)
+                  tbl.remove()
+                  tableCreate(item,amount,place)
+               }
             }
          </script>
 
