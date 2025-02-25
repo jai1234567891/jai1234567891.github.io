@@ -43,6 +43,12 @@
             text-align: center;
             padding: 0;
          }
+         input::-webkit-outer-spin-button,
+         input::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0
+         }
+
       </style>
 
          <h1>GearCats Electrical Inventory</h1>
@@ -101,6 +107,8 @@
 
                   const textBox = document.createElement('input')
                   textBox.setAttribute("id","numberInput" + i)
+                  textBox.setAttribute("type","number")
+
                   //creating the table (create cell for each item)
                   td1 = tr.insertCell()
                   td1.appendChild(document.createTextNode(`${theItem.at(i)}`))
@@ -217,7 +225,8 @@
                let cellIndex = document.getElementById("tester").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                let change = document.getElementById("numberInput" + rowNumber).value
-               cellIndex[1].innerHTML = updateAmount(change, itemName)
+
+               cellIndex[1].innerHTML = updateAmount(1*change, itemName)
                }
          </script>
 

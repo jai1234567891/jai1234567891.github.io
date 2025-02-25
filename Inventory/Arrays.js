@@ -10,12 +10,14 @@ let place = ["loc1","loc1","lo4","lo3"]
     // updates amount in amount array based on text box input
     //requires: name of item being updated (name imported based on point in table)
 function updateAmount(newAmount,itemName){
-    amount[item.indexOf(itemName)] = parseInt(amount[item.indexOf(itemName)])+parseInt(newAmount)
-    if (amount[item.indexOf(itemName)]<0){
-        amount[item.indexOf(itemName)] = 0
+    if(typeof newAmount === "number"){
+        amount[item.indexOf(itemName)] = parseInt(amount[item.indexOf(itemName)])+parseInt(newAmount)
+        if (amount[item.indexOf(itemName)]<0){
+            amount[item.indexOf(itemName)] = 0
+        }
     }
     return amount[item.indexOf(itemName)]
-}
+    }
 
 //addItem (adds item to arrays)
 function addItem(theItem,theCount,theLocation)
