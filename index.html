@@ -13,12 +13,9 @@
             padding: 0;
          }
          .table2,.td2{
-            border: 4px solid transparent;
+            border: 2px solid transparent;
             border-collapse: collapse;
             background-color: white;
-            table-layout:fixed;
-            text-align: center;
-            padding: 0;
          }
 
          td input{
@@ -49,6 +46,20 @@
       </style>
 
          <h1>GearCats Electrical Inventory</h1>
+
+
+      <body>
+         <input type = text; id="searchBars"; oninput = searcher()>
+         <script>
+            function searcher(){
+               let output = searchBar(item, amount, place, document.getElementById("searchBars").value)
+               let searchedItem = output[0]
+               let searchedAmount = output[1]
+               let searchedLoc = output[2]
+               tbl.remove()
+               tableCreate(searchedItem, searchedAmount, searchedLoc)
+            }
+         </script>
          <!-- creates the table based on array values-->
          <table style="width: 100%"; class="Tables1">
             <tr>
@@ -64,7 +75,6 @@
           display each array with index of loop count-->
          </table>
 
-      <body>
          <script type = "text/javascript">
             function tableCreate(theItem,theAmount,theLocation){  
                let body = document.body;
@@ -114,6 +124,51 @@
                   td7.appendChild(button3)
                   td7.style.width = "5%"
                }
+               const itemBox = document.createElement('input')
+               itemBox.setAttribute("id","itemBox")
+               itemBox.setAttribute("type","text")
+               itemBox.placeholder = "Enter Item"
+
+               const amountBox = document.createElement('input')
+               amountBox.setAttribute("id","amountBox")
+               amountBox.setAttribute("type","number")
+               amountBox.placeholder = "Amount"
+
+               const locationBox = document.createElement('input')
+               locationBox.setAttribute("type","text")
+               locationBox.setAttribute("id","locationBox")
+               locationBox.placeholder = "Enter Location"
+
+               const createItem = document.createElement('button')
+               createItem.innerHTML = "+"
+               createItem.classList.add ('button')
+               createItem.onclick = function(){insertItem()}
+
+               const tr = tbl.insertRow()
+
+               td8 = tr.insertCell()
+               td8.colSpan = '2'
+               td8.style.width = "35%"
+               td8.classList.add('td2')
+               td8.appendChild(itemBox)
+
+               td9 = tr.insertCell()
+               td9.colSpan = '2'
+               td9.style.width = "20%"
+               td9.classList.add("td2")
+               td9.appendChild(amountBox)
+
+               td10 = tr.insertCell()
+               td10.colSpan = '2'
+               td10.style.width = "35%"
+               td10.classList.add("td2")
+               td10.appendChild(locationBox)
+
+               td11 = tr.insertCell()
+               td11.style.width = "5%"
+               td11.classList.add("td2")
+               td11.appendChild(createItem)
+
                body.appendChild(tbl)
             }
             tableCreate(item,amount,place)
@@ -188,15 +243,6 @@
             }
          </script>
 
-         <table style = "width:100%"; class = "table2">
-            <tr>
-               <td style = "width:35%"; class = "td2"><input type="text" id="itemBox" placeholder="Enter Item"></td>
-               <td style = "width:20%"; class = "td2"><input type = "number" id = "amountBox" placeholder="Amount"></td>
-               <td style = "width:35%"; class = "td2"><input type = "text" id = "locationBox" placeholder = "Enter Location"></td>
-               <td style = "width:10%";><button class = "button" onclick = insertItem()> Add Item</button></td>
-            </tr>
-         </table>
-
          <script type = "text/javascript">
             function insertItem(){
                let newItem = document.getElementById("itemBox").value
@@ -207,6 +253,7 @@
                tableCreate(item,amount,place)
             }
          </script>
+
        </body>
    </head>
 </html>         
