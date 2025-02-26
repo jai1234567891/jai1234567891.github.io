@@ -12,12 +12,9 @@ let sorter="none"
     //output: returns the sorted array, or cancels sort
     
 function alphaSort(theItem,theAmount,theLocation){
-    /*let attempt = document.createElement("p")
-    attempt.textContent(`$sorter`)
-    let tp = document.body
-    tp.appendChild(attempt)*/
     //if SORTER = alpha (currently sorted alphabetically)
-        //then: create 3 new arrays, forloop -> i=item.length, i>0, i--
+        //then: create 3 new arrays, 
+        // for -> i=item.length, i>0, i--
             // newItem.push(item array at i)
             // newAmount.push(amount array at i)
             // newLocation.push (loc array at i)
@@ -34,9 +31,9 @@ function alphaSort(theItem,theAmount,theLocation){
         let newAmount = []
         let newLocation = []
         for(let i = reverseItem.length-1; i>=0; i--){
-            newItem.push(reverseItem.at(i))
-            newAmount.push(reverseAmount.at(i))
-            newLocation.push(reverseLocation.at(i))
+            newItem.push(reverseItem[i])
+            newAmount.push(reverseAmount[i])
+            newLocation.push(reverseLocation[i])
         }
         sorter = "reversed"
         return [newItem,newAmount,newLocation]
@@ -56,14 +53,14 @@ function alphaSort(theItem,theAmount,theLocation){
     //then:
     //for i=0, i<=legnth of array, i++
         //if(begins with number)
-            //number array.push item.at(i)
+            //number array.push item[i]
         //else
-            //letterarry.push(item.at(i))
-    //newitemarray.push(numberarray(by number(difference between a and b)).sort)
-    //newitemarray.push(letterarray.sort)
+            //letterarry.push(item[i])
+    //newitemarray.push(sortIt(numberArray)) adds the sorted numbers into the new array
+    //newitemarray.push(sortIt(letterArray))
     //for i=0, i<=length of array, i++
-        //newamountarray.push(amount.at(items.indexOf(newitemarray.at(i)))
-        //newlocarray.push(location.at(items.indexOf(newitemarray.at(i)))
+        //newamountarray.push(amount[items.indexOf(newitemarray[i])])
+        //newlocarray.push(location[items.indexOf(newitemarray[i])])
     //set sorter to alphabetical
     //return 3 new arrays
     else{
@@ -77,7 +74,7 @@ function alphaSort(theItem,theAmount,theLocation){
         for(let i = 0; i<theItem.length; i++){
             if(theItem[i].startsWith("1")||theItem[i].startsWith("2")||theItem[i].startsWith("3")||theItem[i].startsWith("4")||item[i].startsWith("5")||item[i].startsWith("6")||
             theItem[i].startsWith("7")||theItem[i].startsWith("8")||theItem[i].startsWith("9")||theItem[i].startsWith("0")){
-                numberItem.push(theItem.at(i))
+                numberItem.push(theItem[i])
             }
             else{
                 letterItem.push(theItem[i])
@@ -106,26 +103,28 @@ function alphaSort(theItem,theAmount,theLocation){
                 number.push(numberItem[i].substring(0,indexs+1))
             }
         }
-        sortedNumber = number.toSorted((a,b) => a-b) //sorts by smallest to largest
+        //sorts numbers smallest to largest
+ 
+        sortedNumber = sortIt(number)//sorts by smallest to largest
         //find sorted number in index of number, get value of numberItem at that index, find that value in main, search main arrays at 
         //that index, put those values into new arrays so that numbers come first
         for(let i=0; i<numberItem.length; i++){
             let index = 0
-            index = number.indexOf(sortedNumber.at(i)) //get index of sorted number in number
-            index = theItem.indexOf(numberItem.at(index))
-            newItem.push(theItem.at(index))
-            newAmount.push(theAmount.at(index))
-            newLocation.push(theLocation.at(index))
+            index = number.indexOf(sortedNumber[i]) //get index of sorted number in number
+            index = theItem.indexOf(numberItem[index])
+            newItem.push(theItem[index])
+            newAmount.push(theAmount[index])
+            newLocation.push(theLocation[index])
         }
         //add in sorted items
-        let theSorted = letterItem.toSorted();
+        let theSorted = sortIt(letterItem);
         for(let i=0; i<letterItem.length;i++){
             let index = 0
-            index = letterItem.indexOf((theSorted.at(i)))
+            index = letterItem.indexOf((theSorted[i]))
             index = theItem.indexOf(letterItem[index])
-            newItem.push(theItem.at(index))
-            newAmount.push(theAmount.at(index))
-            newLocation.push(theLocation.at(index))
+            newItem.push(theItem[index])
+            newAmount.push(theAmount[index])
+            newLocation.push(theLocation[index])
         }
         sorter = "alphabetical"
         return [newItem,newAmount,newLocation]
@@ -160,9 +159,9 @@ function numberSort (theItem, theAmount, theLocation){
         let newAmount = []
         let newLocation = []
         for(let i = (reverseItem.length-1); i>=0; i--){
-            newItem.push(reverseItem.at(i))
-            newAmount.push(reverseAmount.at(i))
-            newLocation.push(reverseLocation.at(i))
+            newItem.push(reverseItem[i])
+            newAmount.push(reverseAmount[i])
+            newLocation.push(reverseLocation[i])
         }
         sorter = "largest"
         return [newItem, newAmount, newLocation]
@@ -180,17 +179,17 @@ function numberSort (theItem, theAmount, theLocation){
     //else (currently not sorted or some other sort)
     //create new arrays
     //then:
-    //newamountarray.push(amount.tosort(a,b(difference (a-b)))
+    //newamountarray.push(sortIt(amount)))
     //for i=0, i<=length of array, i++
-        //newitemarray.push(amount.at(amount.indexOf(newamountarry.at(i)))
-        //newlocarray.push(location.at(amount.indexOf(newamountarray.at(i)))
+        //newitemarray.push(amount[amount.indexOf(newamountarry[i])])
+        //newlocarray.push(location[amount.indexOf(newamountarray[i])])
     //set sorter to smallest
     //return 3 new arrays 
     else{
         let newItem = []
         let newAmount = []
         let newLocation =[]
-        newAmount = theAmount.toSorted((a,b) => a-b)
+        newAmount = sortIt(theAmount)
         for (let i=0; i<theAmount.length; i++){
             let index = 0
             let itemCut = theItem
@@ -206,9 +205,9 @@ function numberSort (theItem, theAmount, theLocation){
                     numberCut = numberCut.slice(1+numberCut.indexOf(newAmount[i]))
                 }
             }
-            currentItem = itemCut.at(numberCut.indexOf(newAmount[i]))
+            currentItem = itemCut[numberCut.indexOf(newAmount[i])]
             newItem.push(currentItem)
-            newLocation.push(theLocation.at(theItem.indexOf(currentItem))) //gets index of item in main array for finding position
+            newLocation.push(theLocation[theItem.indexOf(currentItem)]) //gets index of item in main array for finding position
         }
         sorter = "smallest"
         return [newItem, newAmount, newLocation]
@@ -229,26 +228,27 @@ function locationSort(theItem,theAmount,theLocation){
         sorter = "none" // allows for calling to sort by alphabetical
         //get all locations
         //for i=length-1, i>=0, i--
-            //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
-                //sortlocations.push(location.at(i))
-        //sortlocations.sort()
+            //if !(sortLocations.includes(locations[i]) -> does not include current location in list
+                //sortlocations.push(location[i])
+        //sortIt(sortLocations)
         let sortLocations = []
-        for (let i = theLocation.length-1; i>=0; i--){
+        for (let i = 0; i<theLocation.length; i++){
             if (!sortLocations.includes(theLocation[i])){
                 sortLocations.push(theLocation[i])
             }
         }
-        sortLocations.sort().reverse() //revsers the sort
-        for(let i=0; i<sortLocations.length;i++){
+        
+        sortLocations = sortIt(sortLocations) 
+        for(let i=sortLocations.length-1; i>=0;i--){ //revsers the sort by going from the end ot the start
             sorter = "none"
             let currentItem = []
             let currentAmount = []
             let currentLocation = []
             for(let a=0; a<theLocation.length;a++){
                 if(sortLocations[i] === theLocation[a]){
-                    currentItem.push(theItem.at(a))
-                    currentAmount.push(theAmount.at(a))
-                    currentLocation.push(theLocation.at(a))
+                    currentItem.push(theItem[a])
+                    currentAmount.push(theAmount[a])
+                    currentLocation.push(theLocation[a])
                 }
             }
                 
@@ -286,16 +286,17 @@ function locationSort(theItem,theAmount,theLocation){
         sorter = "none" // allows for calling to sort by alphabetical
         //get all locations
         //for i=0, i<=length, i++
-            //if !(sortLocations.includes(locations.at(i)) -> does not include current location in list
-                //sortlocations.push(location.at(i))
-            //sortlocations.sort()
+            //if !(sortLocations.includes(locations[i]) -> does not include current location in list
+                //sortlocations.push(location[i])
+            //sortIt(sortLocations)
+
         let sortLocations = []
         for (let i =0; i<theLocation.length; i++){
             if (!sortLocations.includes(theLocation[i])){
                 sortLocations.push(theLocation[i])
             }
         }
-        sortLocations.sort()
+        sortLocations = sortIt(sortLocations)
         //having sorted locations by alpha, need to get all values with that location, and sort them alphabetically, then push to final arrays in order
         for(let i=0; i<sortLocations.length;i++){
             sorter = "none"
@@ -304,12 +305,12 @@ function locationSort(theItem,theAmount,theLocation){
             let currentLocation = []
             for(let a=0; a<theLocation.length;a++){
                 if(sortLocations[i] === theLocation[a]){
-                currentItem.push(theItem.at(a))
-                    currentAmount.push(theAmount.at(a))
-                    currentLocation.push(theLocation.at(a))
+                    currentItem.push(theItem[a])
+                    currentAmount.push(theAmount[a])
+                    currentLocation.push(theLocation[a])
                 }
             }
-                
+
             //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
 
             returned = alphaSort(currentItem,currentAmount,currentLocation)
@@ -337,9 +338,9 @@ function locationSort(theItem,theAmount,theLocation){
         //create filtitem,filtamount,filtloc,
         //for i=0; i<item.length; i++
             //if(item.includes(textboxstring)||location.includes(textboxstring))
-                //filtitem = item.at(i)
-                //filtamount = amount.at(i)
-                //filtloc = amount.at(i)
+                //filtitem = item[i]
+                //filtamount = amount[i]
+                //filtloc = amount[i]
         //return filtitemarray,filtamountarray,filtlocarray
 function searchBar(theItem,theAmount,theLocation,key){
     let newItem = []
@@ -353,4 +354,40 @@ function searchBar(theItem,theAmount,theLocation,key){
         }
     }
     return [newItem, newAmount, newLocation]
+}
+
+/*sorter method -> bubble sort
+    compare to values, if the lower one in the index is greater than the one after, swap place
+    repeat this for the length of the array
+    inputs: array
+    output: sortedArray
+    create new unsortedarray = input array
+    sorted array = []
+    
+    for a=0; a<unsorted.length
+        for i = 0; i<UNSORTED.length-a    // goes through each item in the array that has not been sorted
+            if  UNSORTED[i]> UNSORTED[i+1] // this would mean it comes after the current item
+                TEMPVALUE = UNSORTED[i]
+                UNSORTED[i] = UNSORTED[i+1]
+                UNSORTED[i+1] = TEMPVALUE
+            end if
+        end for
+    end for
+    sortedArray = unsortedArray
+    reutrn sortedArray*/
+    
+function sortIt(theArray){
+    let unsortedArray = theArray
+    let sortedArray = []
+    for (let a = 0; a<unsortedArray.length; a++){
+        for(let i=1; i <= unsortedArray.length; i++){
+            if(unsortedArray[i-1]>unsortedArray[i]){
+                let tempValue = unsortedArray[i]
+                unsortedArray[i] = unsortedArray[i-1]
+                unsortedArray[i-1] = tempValue
+            }
+        }
+    }
+    sortedArray = unsortedArray
+    return sortedArray
 }
