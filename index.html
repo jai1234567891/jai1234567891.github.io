@@ -2,7 +2,7 @@
 <html>
    <head>
       <script type = "text/javascript" src='./Inventory/Arrays.js'></script>
-      <script type = "text/javascript" src='./Inventory/Sorter.js'></script>
+      <script type = "text/javascript" src='./Inventory/Sorter.js'> </script>
       <script type = "text/javascript" src='./Inventory/Saving.js'></script>
 
       <style>
@@ -60,7 +60,7 @@
          <script type = "text/plain" src="./Inventory/Data.txt"></script>
 
          <iframe type="text/plain"  src="./Inventory/Data.txt" id = "datainput" style = "visibility:hidden; height: 0px"></iframe>   
-
+         
          <script type = "text/javascript">
             function getData(){
                //getting the data from data.txt then able to parse it (string search for []) to get data out of it and save it as item, amount, place
@@ -68,12 +68,14 @@
                let objectData = document.getElementById("datainput")
                if(document.readyState === "complete"){ //checks to see if document completely loaded before parsing as it can lead to error if not
                arrayData = objectData.contentDocument.body.childNodes[0].innerHTML.substring(0) // creates copy which allows for hiding of object
-               objectData.style.display = "none" // hiding the object once its been used
                parseData(arrayData) // calling this to actually parse the data and save it as the proper array
+               objectData.style.display = "none" // hiding the object once its been used
                }
                else{
                   setTimeout(getData,10) // setting a timeout between calls to avoid exceeding max call stack
+                  return
                }
+               tableCreate(item,amount,place)
             }
          </script>
 
@@ -89,6 +91,9 @@
                tableCreate(searchedItem, searchedAmount, searchedLoc)
             }
          </script>
+
+         <button class = "button" style = "width:15%; border-radius:0" onclick = "saveData()">Save Data</button>
+
          <!-- creates the table based on array values-->
          <table style="width: 100%"; class="Tables1">
             <tr>
@@ -105,7 +110,7 @@
          </table> 
 
          <script type = "text/javascript">
-            function tableCreate(theItem,theAmount,theLocation){  
+            function tableCreate(theItem,theAmount,theLocation){ 
                let body = document.body;
                tbl = document.createElement('table');
                tbl.style.width = '100%';
@@ -285,9 +290,15 @@
                }
             }
          </script>
-         <script type = "text/javascript" async = "true" defer = "true">
+
+         <script type = "text/javascript">
+            function saveData(){ // on click will save data to repository
+               
+            }
+         </script>
+         
+         <script type = "text/javascript" defer = "true" async = "true">
             getData()
-            tableCreate(item,amount,place)
          </script> 
        </body>
    </head>

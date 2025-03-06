@@ -212,9 +212,7 @@ function numberSort (theItem, theAmount, theLocation){
         sorter = "smallest"
         return [newItem, newAmount, newLocation]
     }
-}
-
-    
+}   
     //Sorts by location
         //same as alpha sorter but location array instead of name array
     
@@ -226,20 +224,15 @@ function locationSort(theItem,theAmount,theLocation){
         let newLocation =[]
         let returned = []
         sorter = "none" // allows for calling to sort by alphabetical
-        //get all locations
-        //for i=length-1, i>=0, i--
-            //if !(sortLocations.includes(locations[i]) -> does not include current location in list
-                //sortlocations.push(location[i])
-        //sortIt(sortLocations)
+        //get all individual locations
         let sortLocations = []
         for (let i = 0; i<theLocation.length; i++){
             if (!sortLocations.includes(theLocation[i])){
                 sortLocations.push(theLocation[i])
             }
         }
-        
         sortLocations = sortIt(sortLocations) 
-        for(let i=sortLocations.length-1; i>=0;i--){ //revsers the sort by going from the end ot the start
+        for(let i=sortLocations.length-1; i>=0;i--){ //reverses the sort by going from the end ot the start
             sorter = "none"
             let currentItem = []
             let currentAmount = []
@@ -251,9 +244,7 @@ function locationSort(theItem,theAmount,theLocation){
                     currentLocation.push(theLocation[a])
                 }
             }
-                
             //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-
             returned = alphaSort(currentItem,currentAmount,currentLocation)
             let sortedLocations = []
             let sortedItems = []
@@ -270,13 +261,11 @@ function locationSort(theItem,theAmount,theLocation){
         sorter = "reversed alphabetically by location"
         return[newItem,newAmount,newLocation]
     }
-        
         //unsort
     else if(sorter === "reversed alphabetically by location"){
         sorter = "none"
         return [theItem, theAmount, theLocation]
     }
-    
         //sort alpha by location, then sort each location by alpha
     else{
         let newItem = []
@@ -284,12 +273,7 @@ function locationSort(theItem,theAmount,theLocation){
         let newLocation =[]
         let returned = []
         sorter = "none" // allows for calling to sort by alphabetical
-        //get all locations
-        //for i=0, i<=length, i++
-            //if !(sortLocations.includes(locations[i]) -> does not include current location in list
-                //sortlocations.push(location[i])
-            //sortIt(sortLocations)
-
+        //get all unique locations
         let sortLocations = []
         for (let i =0; i<theLocation.length; i++){
             if (!sortLocations.includes(theLocation[i])){
@@ -310,9 +294,7 @@ function locationSort(theItem,theAmount,theLocation){
                     currentLocation.push(theLocation[a])
                 }
             }
-
             //sort currentLocation alphabetically, add them to newItem, newAmount, newLocation, then move on to next alphabetical location
-
             returned = alphaSort(currentItem,currentAmount,currentLocation)
             let sortedLocations = []
             let sortedItems = []
@@ -378,11 +360,12 @@ function searchBar(theItem,theAmount,theLocation,key){
     
 function sortIt(theArray){
     let unsortedArray = []
-    unsortedArray = theArray.slice(0) //making a copy of the array to avoid chaning the inital values
+    unsortedArray = theArray.slice(0) //making a copy of the array to avoid changing the inital value
     let sortedArray = []
     for (let a = 0; a<unsortedArray.length; a++){
         for(let i=1; i <= unsortedArray.length; i++){
             if(unsortedArray[i-1]>unsortedArray[i]){
+                console.log(amount)
                 let tempValue = unsortedArray[i]
                 unsortedArray[i] = unsortedArray[i-1]
                 unsortedArray[i-1] = tempValue

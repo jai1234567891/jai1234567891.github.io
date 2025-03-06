@@ -7,7 +7,7 @@ let place = []
 let amount = []
 
 //updateAmount(updates amount based on text input)
-    // updates amount in amount array based on text box input
+    //updates amount in amount array based on text box input
     //requires: name of item being updated (name imported based on point in table)
 function updateAmount(newAmount,itemName){
     if(typeof newAmount === "number"){
@@ -16,14 +16,13 @@ function updateAmount(newAmount,itemName){
             amount[item.indexOf(itemName)] = 0
         }
     }
-    return amount[item.indexOf(itemName)]
-    }
+    return amount[item.indexOf(itemName).toString()]
+}
 
 //addItem (adds item to arrays)
-function addItem(theItem,theCount,theLocation)
-{ 
+function addItem(theItem,theCount,theLocation){ 
     item.push(theItem)
-    amount.push(parseInt(theCount))
+    amount.push(theCount)
     place.push(theLocation)
 }
 
@@ -44,21 +43,15 @@ function removeItem(itemName){
     //then get each item out of each array (for loop based on amount of ,), removing it and pushing it into its proper array
 
 function parseData(theData){
-    if(theData.indexOf("s") === -1){
-        return "error"
-    }
     let itemArray = []
     let amountArray = []
     let locationArray = []
     let totalArray = []
-    //let amount = []
-    //let place = []
     //splits the original based on ] to get each array
     totalArray = theData.split("]")
     itemArray.push(totalArray[0])
     amountArray.push(totalArray[1])
     locationArray.push(totalArray[2])
-    //return itemArray
     //for each array and for their length, go through and push each item to the proper array
     for(let a=0; a<3; a++){
         if(a===0){ // first time so getting it for the itemArray
@@ -91,5 +84,5 @@ function parseData(theData){
             }
         }
     }
-    return "34" 
+    return
 }
