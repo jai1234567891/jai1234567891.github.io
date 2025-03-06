@@ -3,6 +3,8 @@
    <head>
       <script type = "text/javascript" src='./Inventory/Arrays.js'></script>
       <script type = "text/javascript" src='./Inventory/Sorter.js'></script>
+      <script type = "text/javascript" src='./Inventory/Saving.js'></script>
+
       <style>
          table,th,td,tr{ 
             border: 2px solid teal;
@@ -54,8 +56,29 @@
          <h1 style = "color:teal">GearCats Electrical Inventory</h1>
 
 
-      <body>
+      <body> 
+         <script type = "text/plain" src="./Inventory/Data.txt"></script>
+
+         <iframe type="text/plain"  src="./Inventory/Data.txt" id = "datainput" style = "visibility:hidden; height: 0px"></iframe>   
+
+         <script type = "text/javascript">
+            function getData(){
+               //getting the data from data.txt then able to parse it (string search for []) to get data out of it and save it as item, amount, place
+               let arrayData = ""
+               let objectData = document.getElementById("datainput")
+               if(document.readyState === "complete"){ //checks to see if document completely loaded before parsing as it can lead to error if not
+               arrayData = objectData.contentDocument.body.childNodes[0].innerHTML.substring(0) // creates copy which allows for hiding of object
+               objectData.style.display = "none" // hiding the object once its been used
+               parseData(arrayData) // calling this to actually parse the data and save it as the proper array
+               }
+               else{
+                  setTimeout(getData,10) // setting a timeout between calls to avoid exceeding max call stack
+               }
+            }
+         </script>
+
          <input type = text; id="searchBars"; oninput = searcher()>
+         
          <script>
             function searcher(){
                let output = searchBar(item, amount, place, document.getElementById("searchBars").value)
@@ -79,7 +102,7 @@
             </tr>
             <!-- get length of array, put into for loop going for length, get array item based on loop count
           display each array with index of loop count-->
-         </table>
+         </table> 
 
          <script type = "text/javascript">
             function tableCreate(theItem,theAmount,theLocation){  
@@ -179,7 +202,6 @@
 
                body.appendChild(tbl)
             }
-            tableCreate(item,amount,place)
          </script>
 
          <script type = "text/javascript">
@@ -225,7 +247,6 @@
                let cellIndex = document.getElementById("tester").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                let change = document.getElementById("numberInput" + rowNumber).value
-
                cellIndex[1].innerHTML = updateAmount(1*change, itemName)
                }
          </script>
@@ -264,7 +285,10 @@
                }
             }
          </script>
-
+         <script type = "text/javascript" async = "true" defer = "true">
+            getData()
+            tableCreate(item,amount,place)
+         </script> 
        </body>
    </head>
 </html>         

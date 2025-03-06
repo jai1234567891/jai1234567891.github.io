@@ -2,9 +2,9 @@
     //Name array (stores name of items)
     //amount array (stores the amount of each item)
     //location array (stores location of each item)
-let item = ["ties","scissors",'wires','pliers']
-let amount = [1,2,5,2]
-let place = ["loc1","loc1","lo4","lo3"]
+let item = []
+let place = []
+let amount = []
 
 //updateAmount(updates amount based on text input)
     // updates amount in amount array based on text box input
@@ -39,12 +39,57 @@ function removeItem(itemName){
     place.splice(item.indexOf(itemName),1)
 }
 
-//table creaation:
-    //get elements for the table
-    //set constants for document elements
-    //create row+cells
-        //for(i=0; i<item.legnth; i++) for loop for each column
-            //create new row (create element tr)
-            //for(i=0, i<=rows in init table; i++)
-                //create element td
-                //create cell text ()
+//parseData -> parsing the data to save as the arrays
+    //splice out each array (split off by []), removing it from the intial array
+    //then get each item out of each array (for loop based on amount of ,), removing it and pushing it into its proper array
+
+function parseData(theData){
+    if(theData.indexOf("s") === -1){
+        return "error"
+    }
+    let itemArray = []
+    let amountArray = []
+    let locationArray = []
+    let totalArray = []
+    //let amount = []
+    //let place = []
+    //splits the original based on ] to get each array
+    totalArray = theData.split("]")
+    itemArray.push(totalArray[0])
+    amountArray.push(totalArray[1])
+    locationArray.push(totalArray[2])
+    //return itemArray
+    //for each array and for their length, go through and push each item to the proper array
+    for(let a=0; a<3; a++){
+        if(a===0){ // first time so getting it for the itemArray
+            itemArray = itemArray.toString() // converting to a string from the array
+            let itemAmounts = []
+            itemAmounts = itemArray.split(",")
+            itemAmounts[0] = itemAmounts[0].toString().substring(1) //removing the open bracket at the start
+            for(let i=0; i<itemAmounts.length; i++){ //gets the length of the array then adds each item into the final array
+                item.push(itemAmounts[i])
+            }
+        }
+
+        else if(a===1){ // first time so getting it for the itemArray
+            amountArray = amountArray.toString() // converting to a string from the array
+            let numberAmount = []
+            numberAmount = amountArray.split(",")
+            numberAmount[0] = numberAmount[0].toString().substring(1) //removing the open bracket at the start
+            for(let i=0; i<numberAmount.length; i++){ //gets the length of the array then adds each item into the final array
+                amount.push(numberAmount[i])
+            }
+        }
+
+        else{ // first time so getting it for the itemArray
+            locationArray = locationArray.toString() // converting to a string from the array
+            let locationAmounts = []
+            locationAmounts = locationArray.split(",")
+            locationAmounts[0] = locationAmounts[0].toString().substring(1) //removing the open bracket at the start
+            for(let i=0; i<locationAmounts.length; i++){ //gets the length of the array then adds each item into the final array
+                place.push(locationAmounts[i])
+            }
+        }
+    }
+    return "34" 
+}

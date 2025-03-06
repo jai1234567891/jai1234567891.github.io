@@ -1,0 +1,1 @@
+[ties,scissors,wires,pliers][1,2,5,2][loc1,loc1,lo4,lo3]

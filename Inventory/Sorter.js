@@ -205,7 +205,7 @@ function numberSort (theItem, theAmount, theLocation){
                     numberCut = numberCut.slice(1+numberCut.indexOf(newAmount[i]))
                 }
             }
-            currentItem = itemCut[numberCut.indexOf(newAmount[i])]
+            let currentItem = itemCut[numberCut.indexOf(newAmount[i])]
             newItem.push(currentItem)
             newLocation.push(theLocation[theItem.indexOf(currentItem)]) //gets index of item in main array for finding position
         }
@@ -377,7 +377,8 @@ function searchBar(theItem,theAmount,theLocation,key){
     reutrn sortedArray*/
     
 function sortIt(theArray){
-    let unsortedArray = theArray
+    let unsortedArray = []
+    unsortedArray = theArray.slice(0) //making a copy of the array to avoid chaning the inital values
     let sortedArray = []
     for (let a = 0; a<unsortedArray.length; a++){
         for(let i=1; i <= unsortedArray.length; i++){
