@@ -365,7 +365,6 @@ function sortIt(theArray){
     for (let a = 0; a<unsortedArray.length; a++){
         for(let i=1; i <= unsortedArray.length; i++){
             if(unsortedArray[i-1]>unsortedArray[i]){
-                console.log(amount)
                 let tempValue = unsortedArray[i]
                 unsortedArray[i] = unsortedArray[i-1]
                 unsortedArray[i-1] = tempValue
