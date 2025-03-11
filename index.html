@@ -3,7 +3,7 @@
    <head>
       <script type = "text/javascript" src='./Inventory/Arrays.js'></script>
       <script type = "text/javascript" src='./Inventory/Sorter.js'> </script>
-      <script type = "text/javascript" src='./Inventory/Saving.js'></script>
+      <script type = "module" src = './Inventory/Saving.js'></script>
 
       <style>
          table,th,td,tr{ 
@@ -53,14 +53,16 @@
 
       </style>
 
-         <h1 style = "color:teal">GearCats Electrical Inventory</h1>
+      <h1 style = "color:teal">GearCats Electrical Inventory</h1>
 
 
       <body> 
          <script type = "text/plain" src="./Inventory/Data.txt"></script>
-
-         <iframe type="text/plain"  src="./Inventory/Data.txt" id = "datainput" style = "visibility:hidden; height: 0px"></iframe>   
          
+         <p id="34">2</p>
+
+         <iframe type="text/plain"  src="./Inventory/Data.txt" id = "datainput" style = "visibility:hidden; height: 0px"></iframe>
+
          <script type = "text/javascript">
             function getData(){
                //getting the data from data.txt then able to parse it (string search for []) to get data out of it and save it as item, amount, place
@@ -92,7 +94,7 @@
             }
          </script>
 
-         <button class = "button" style = "width:15%; border-radius:0" onclick = "saveData()">Save Data</button>
+         <button class = "button" style = "width:15%; border-radius:0" id ="saveButton"> Save Data </button>
 
          <!-- creates the table based on array values-->
          <table style="width: 100%"; class="Tables1">
@@ -290,16 +292,16 @@
                }
             }
          </script>
-
-         <script type = "text/javascript">
-            function saveData(){ // on click will save data to repository
-               
-            }
-         </script>
          
          <script type = "text/javascript" defer = "true" async = "true">
             getData()
-         </script> 
+         </script>
+         
+         <script type = "module">
+            import {Octokit} from "https://esm.sh/octokit";
+            import {editFile} from "./Inventory/Saving.js";
+            document.getElementById("saveButton").onclick = function(){editFile(item, amount, place)}
+         </script>
        </body>
    </head>
 </html>         
