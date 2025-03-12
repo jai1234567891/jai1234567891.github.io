@@ -31,7 +31,6 @@ async function getSave(){
     return tet
 }
 
-
 export async function editFile(theItem, theAmount, thePlace){
     let dataDox = await getSave()
     let dataKey=Object.values(dataDox)[3]
