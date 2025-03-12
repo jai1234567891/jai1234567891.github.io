@@ -35,7 +35,6 @@ async function getSave(){
 export async function editFile(theItem, theAmount, thePlace){
     let dataDox = await getSave()
     let dataKey=Object.values(dataDox)[3]
-    let datText = Object.values(dataKey)[9]
     const octokit = new Octokit({
         auth: token
     });
@@ -48,7 +47,7 @@ export async function editFile(theItem, theAmount, thePlace){
         },
         message : "updated inventory",
         content : btoa("["+theItem+"]"+"["+theAmount+"]"+"["+thePlace+"]"),
-        sha: datText,
+        sha: Object.values(dataKey)[2],
     })
 }
 
