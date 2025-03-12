@@ -69,9 +69,9 @@
                let arrayData = ""
                let objectData = document.getElementById("datainput")
                if(document.readyState === "complete"){ //checks to see if document completely loaded before parsing as it can lead to error if not
-               arrayData = objectData.contentDocument.body.childNodes[0].innerHTML.substring(0) // creates copy which allows for hiding of object
-               parseData(arrayData) // calling this to actually parse the data and save it as the proper array
-               objectData.style.display = "none" // hiding the object once its been used
+                  arrayData = objectData.contentDocument.body.childNodes[0].innerHTML.substring(0) // creates copy which allows for hiding of object
+                  parseData(arrayData) // calling this to actually parse the data and save it as the proper array
+                  objectData.style.display = "none" // hiding the object once its been used
                }
                else{
                   setTimeout(getData,10) // setting a timeout between calls to avoid exceeding max call stack
@@ -302,6 +302,7 @@
             import {editFile} from "./Inventory/Saving.js";
             document.getElementById("saveButton").onclick = function(){editFile(item, amount, place)}
          </script>
+
        </body>
    </head>
 </html>         

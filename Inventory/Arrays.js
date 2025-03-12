@@ -5,9 +5,7 @@
 let item = []
 let place = []
 let amount = []
-let token1 = "ghp_xbR7aadm36SL4FEFiA"
-let token2 = "098fAAca02yN2yLRX2"
-let token = token1.concat(token2)
+
 
 //updateAmount(updates amount based on text input)
     //updates amount in amount array based on text box input
