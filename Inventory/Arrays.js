@@ -5,6 +5,7 @@
 let item = []
 let place = []
 let amount = []
+let token = "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"
 
 //updateAmount(updates amount based on text input)
     //updates amount in amount array based on text box input

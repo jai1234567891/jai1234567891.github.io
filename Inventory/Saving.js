@@ -18,7 +18,7 @@ import {Octokit} from "https://esm.sh/octokit";
 
 async function getSave(){
     const octokit = new Octokit({
-        auth: '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'
+        auth: token
     });
     let tet = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: 'jai1234567891',
@@ -31,12 +31,13 @@ async function getSave(){
     return tet
 }
 
+
 export async function editFile(theItem, theAmount, thePlace){
     let dataDox = await getSave()
     let dataKey=Object.values(dataDox)[3]
     let datText = Object.values(dataKey)[9]
     const octokit = new Octokit({
-        auth: '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'
+        auth: token
     });
     await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
         owner: 'jai1234567891',
