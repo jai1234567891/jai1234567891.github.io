@@ -6,7 +6,6 @@
       <script type = "module" src = './Inventory/Saving.js'></script>
       <script type = "text/plain" src="./Inventory/Data.txt"></script>
 
-
       <style>
          table,th,td,tr{ 
             border: 2px solid teal;
@@ -83,6 +82,7 @@
          
          <script>
             function searcher(){
+               //each time called, will delete the table, and create a new one only based on whch values align with the search key
                let output = searchBar(item, amount, place, document.getElementById("searchBars").value)
                let searchedItem = output[0]
                let searchedAmount = output[1]
@@ -105,16 +105,17 @@
                <th style = "width:31%"> <button class="button2" onclick="sortByLocation()"> Location </button></th>
                <th style = "width:5%"> <button class = "button">🗑️</button> <!--button for item removal--></th>
             </tr>
-            <!-- get length of array, put into for loop going for length, get array item based on loop count
-          display each array with index of loop count-->
+
          </table> 
 
          <script type = "text/javascript">
+            //get length of array, put into for loop going for length, get array item based on loop count
+            //display each array with index of loop count
             function tableCreate(theItem,theAmount,theLocation){ 
                let body = document.body;
                tbl = document.createElement('table');
                tbl.style.width = '100%';
-               tbl.setAttribute("id","tester");
+               tbl.setAttribute("id","mainTable");
                for(let i=0; i<theItem.length;i++){ //table lenght =amount of items
                   const tr = tbl.insertRow()
                   //creating buttons for the table
@@ -160,6 +161,7 @@
                   td7.appendChild(button3)
                   td7.style.width = "5%"
                }
+               //creating the text box for inputs
                const itemBox = document.createElement('input')
                itemBox.setAttribute("id","itemBox")
                itemBox.setAttribute("type","text")
@@ -249,7 +251,7 @@
             //function to get the value of input and which item to change
             //Get row it is in based on button click, then call update amount based on this value 
             function increaseAmount(rowNumber){
-               let cellIndex = document.getElementById("tester").rows[rowNumber].cells
+               let cellIndex = document.getElementById("mainTable").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                let change = document.getElementById("numberInput" + rowNumber).value
                cellIndex[1].innerHTML = updateAmount(1*change, itemName)
@@ -260,7 +262,7 @@
             //function to get the value of input and which item to change
             //Get row it is in based on button click, then call update amount based on this value 
             function decreaseAmount(rowNumber){
-               let cellIndex = document.getElementById("tester").rows[rowNumber].cells
+               let cellIndex = document.getElementById("mainTable").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                let change = document.getElementById("numberInput" + rowNumber).value
                cellIndex[1].innerHTML = updateAmount(-1*change, itemName)
@@ -271,15 +273,17 @@
             //function to get the value of input and which item to change
             //Get row it is in based on button click, then call update amount based on this value 
             function deleteItem(rowNumber){
-               let cellIndex = document.getElementById("tester").rows[rowNumber].cells
+               let cellIndex = document.getElementById("mainTable").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                removeItem(itemName)
-               let rowIndex = document.getElementById("tester").deleteRow(rowNumber)
+               let rowIndex = document.getElementById("mainTable").deleteRow(rowNumber)
             }
          </script>
 
          <script type = "text/javascript">
+            //inserting item into the table
             function insertItem(){
+               //check to make sure all boxes filled before adding it in
                if(!(document.getElementById("itemBox").value === '' || document.getElementById("amountBox").value === '' || document.getElementById("locationBox").value === '')){
                   let newItem = document.getElementById("itemBox").value
                   let newAmount = document.getElementById("amountBox").value
@@ -292,6 +296,7 @@
          </script>
          
          <script type = "text/javascript" defer = "true" async = "true">
+            //calling getData here as everything should be loaded in to not cause an error
             getData()
          </script>
          
@@ -300,28 +305,6 @@
             import {editFile} from "./Inventory/Saving.js";
             document.getElementById("saveButton").onclick = function(){editFile(item, amount, place)}
          </script>
-
        </body>
    </head>
-</html>         
-
-      <!--Display inventory as table, search bar at top, button to add item at the top-->
-         <!-- adding item is adding to arrays script-->
-            <!-- 
-            "name amount location" is stored in arrays-->
-
-         <!--Search bar-->
-            <!--create local array based on orginal array, filter by contains search box term-->
-
-      <!--on button click of name column, sort alphabetically ascending, descending,-->
-         <!--Script called by sorter name method-->
-         <!--needs to create table based on output-->
-         
-      <!--on button click of amount column, sort via number smallest, largest, none,-->
-         <!--Script called by sorter amount method-->
-      
-      <!--on button click of location column, sort via alpha ascend, descend, none-->
-         <!--Script called by sorter location method-->
-      
-      <!--Next to amount button for changing with text box for amount, buttons for arrows for increase/decrease-->
-         <!--Update amount variable based on button click and change by amount -->
+</html>

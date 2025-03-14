@@ -9,6 +9,8 @@ let amount = []
 //updateAmount(updates amount based on text input)
     //updates amount in amount array based on text box input
     //requires: name of item being updated (name imported based on point in table)
+    //converts current amount to a number, and the input to a number then adds/subtracts them
+    //if it would leave it with value below 0, set value to 0, return the new amount
 function updateAmount(newAmount,itemName){
     if(typeof newAmount === "number"){
         amount[item.indexOf(itemName)] = parseInt(amount[item.indexOf(itemName)])+parseInt(newAmount)
