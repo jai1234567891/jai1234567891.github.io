@@ -6,7 +6,6 @@ let item = []
 let place = []
 let amount = []
 
-
 //updateAmount(updates amount based on text input)
     //updates amount in amount array based on text box input
     //requires: name of item being updated (name imported based on point in table)
@@ -71,7 +70,7 @@ function parseData(theData){
             numberAmount = amountArray.split(",")
             numberAmount[0] = numberAmount[0].toString().substring(1) //removing the open bracket at the start
             for(let i=0; i<numberAmount.length; i++){ //gets the length of the array then adds each item into the final array
-                amount.push(numberAmount[i])
+                amount.push(parseInt(numberAmount[i]))
             }
         }
 

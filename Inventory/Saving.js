@@ -14,9 +14,10 @@ import {Octokit} from "https://esm.sh/octokit";
         //authenicate GitHub user as me in order to authorize the push of the commits
         //create new commit, reason being update inventory
         //push new commit, sync changes
+        //g11h11p11_11g11911w11T11r11A11z11T11p11211111u11g11411y11911l11R11Y11V11o11311n11P11A11s11n11R11G11g11111311511g11711A11
 async function getKey(){
-    const octokit = new Octokit()
-    let tet = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+    /*const octokit = new Octokit()
+    let testData = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: 'jai1234567891',
         repo: 'testing',
         path: 'testFIle',
@@ -24,9 +25,10 @@ async function getKey(){
           'X-GitHub-Api-Version': '2022-11-28'
         }
     })
-    let dataFile = Object.values(tet)[3]
+    let dataFile = Object.values(testData)[3]
     let dataKey = Object.values(dataFile)[9]
-    let decodedKey = atob(dataKey)
+    let decodedKey = atob(dataKey)*/
+    let decodedKey = "g11h11p11_11g11911w11T11r11A11z11T11p11211111u11g11411y11911l11R11Y11V11o11311n11P11A11s11n11R11G11g11111311511g11711A11"
     let key = ""
     for (let i=0; i<decodedKey.length/3; i++){
         key = key.concat(decodedKey.charAt(i*3))
@@ -38,7 +40,7 @@ async function getSave(){
     const octokit = new Octokit({
         auth: await getKey()
     });
-    let tet = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+    let saveFile = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: 'jai1234567891',
         repo: 'jai1234567891.github.io',
         path: 'Inventory/Data.txt',
@@ -46,7 +48,7 @@ async function getSave(){
           'X-GitHub-Api-Version': '2022-11-28'
         }
     })
-    return tet
+    return saveFile
 }
 
 export async function editFile(theItem, theAmount, thePlace){
