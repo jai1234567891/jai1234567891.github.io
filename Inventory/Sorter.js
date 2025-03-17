@@ -87,11 +87,12 @@ function alphaSort(theItem,theAmount,theLocation){
                 slash = numberItem[i].indexOf("/")
                 let indexs = 0
                 for(let a = 0; a<=9; a++){
-                    if (numberItem[i].indexOf(a.toString())>indexs){
+                    if (parseInt(numberItem[i].indexOf(a.toString()))>indexs){
                         indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
                     }
                 }
-                number.push(numberItem[i].substring(0,slash)/numberItem[i].substring(slash+1,indexs+1)) //converts frac to decimal and adds it
+                number.push(parseInt(numberItem[i].substring(0,slash))/parseInt(numberItem[i].substring(slash+1,indexs+1)))
+                //converts frac to decimal and adds it
             }
             else{ //doesnt include "/"
                 let indexs = 0
@@ -100,7 +101,7 @@ function alphaSort(theItem,theAmount,theLocation){
                         indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
                     }
                 }
-                number.push(numberItem[i].substring(0,indexs+1))
+                number.push(parseInt(numberItem[i].substring(0,indexs+1)))
             }
         }
         //sorts numbers smallest to largest
@@ -194,20 +195,21 @@ function numberSort (theItem, theAmount, theLocation){
             let index = 0
             let itemCut = theItem
             let numberCut = theAmount
-            for (let a=0; a<i; a++){//getting how many of each amount there are
+            for (let a=0; a<=i; a++){//getting how many of each amount there are
                 if(newAmount[a] == newAmount[i]){
                     index += 1
                 }
             }
-            if(index>0){
-                for (let a=0; a<index; a++){
+            if(index>1){
+                console.log(index)
+                for (let a=1; a<index; a++){
                     itemCut = itemCut.slice(1+numberCut.indexOf(newAmount[i]))
                     numberCut = numberCut.slice(1+numberCut.indexOf(newAmount[i]))
                 }
             }
             let currentItem = itemCut[numberCut.indexOf(newAmount[i])]
             newItem.push(currentItem)
-            newLocation.push(theLocation[theItem.indexOf(currentItem)]) //gets index of item in main array for finding position
+            newLocation.push(theLocation[theItem.indexOf(currentItem)])//gets index of item in main array for finding position
         }
         sorter = "smallest"
         return [newItem, newAmount, newLocation]

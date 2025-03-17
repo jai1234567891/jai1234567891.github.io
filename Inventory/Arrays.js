@@ -24,7 +24,7 @@ function updateAmount(newAmount,itemName){
 //addItem (adds item to arrays)
 function addItem(theItem,theCount,theLocation){ 
     item.push(theItem)
-    amount.push(theCount)
+    amount.push(parseInt(theCount))
     place.push(theLocation)
 }
 
