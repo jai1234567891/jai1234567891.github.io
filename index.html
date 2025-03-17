@@ -276,7 +276,8 @@
                let cellIndex = document.getElementById("mainTable").rows[rowNumber].cells
                let itemName = cellIndex[0].innerHTML
                removeItem(itemName)
-               let rowIndex = document.getElementById("mainTable").deleteRow(rowNumber)
+               tbl.remove()
+               tableCreate(item,amount,place)
             }
          </script>
 

@@ -98,14 +98,13 @@ function alphaSort(theItem,theAmount,theLocation){
                 let indexs = 0
                 for(let a = 0; a<=9; a++){
                     if (numberItem[i].indexOf(a.toString())>indexs){
-                        indexs = numberItem[i].indexOf(a.toString())    //sets indexs to highest index value of a number
+                        indexs = numberItem[i].indexOf(a)//sets indexs to highest index value of a number
                     }
                 }
-                number.push(parseInt(numberItem[i].substring(0,indexs+1)))
+                number.push(parseFloat(numberItem[i].substring(0,indexs+1)))
             }
         }
         //sorts numbers smallest to largest
- 
         sortedNumber = sortIt(number)//sorts by smallest to largest
         //find sorted number in index of number, get value of numberItem at that index, find that value in main, search main arrays at 
         //that index, put those values into new arrays so that numbers come first
@@ -201,7 +200,6 @@ function numberSort (theItem, theAmount, theLocation){
                 }
             }
             if(index>1){
-                console.log(index)
                 for (let a=1; a<index; a++){
                     itemCut = itemCut.slice(1+numberCut.indexOf(newAmount[i]))
                     numberCut = numberCut.slice(1+numberCut.indexOf(newAmount[i]))
