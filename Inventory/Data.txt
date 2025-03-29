@@ -1,1 +1,1 @@
-[tises,scissors,wires,pliers,0.5 inch mm,0.1 mm top][1,2,5,2,2,2][loc1,loc1,lo4,lo3,elec inv,elec inv]
+[tises,scissors,0.5 inch mm,0.1 mm top,zipties,32 gauge wire][1,2,12,4,130,2][loc1,loc1,lo4,lo3,elec inv,electrical invenory]
